@@ -17,4 +17,3 @@ OBRIGATIONS:
 
 - Implementing testing for both scenarios
 - Create Swagger Documentation
-- Create flow with Draw.io
