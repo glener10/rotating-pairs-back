@@ -8,6 +8,11 @@ GIVEN A request was sent without the number of entries in the body or the number
 WHEN User clicks on the "Generate Random Combinations" button in the Front-End without entries or the entries is less than 2
 THEN Will return a 422 and a message
 
+SCENARIO: Do not increment the number of total of combination generation because the number of entries is more than 20
+GIVEN A request was sent and the number of entries is more than 20
+WHEN User clicks on the "Generate Random Combinations" button in the Front-End
+THEN Will return a 422 and a message
+
 OBRIGATIONS:
 
 - Implementing testing for both scenarios
