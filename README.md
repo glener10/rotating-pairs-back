@@ -6,7 +6,7 @@
 ![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/glener10/rotating-pairs-back)
 ![Contributors](https://img.shields.io/github/contributors/glener10/rotating-pairs-back.svg)
 
-<p align="center"> 🚀 Back-End of Rotating Pairs Web Application. </p>
+<p align="center"> 🚀 Back-End of Rotating Pairs Web Application. Responsible for returning the positions of combinations used in the application and saving monitoring logs. </p>
 
 🏁 Table of Contents
 
@@ -30,7 +30,13 @@
 
 ===================
 
-You can access the deployed application via the link [Rotating Pair](https://rotatingpairs.online)
+You can access the production Front-End application via the link [Rotating Pair](https://rotatingpairs.online)
+
+The Back-End production version is open only to Front-End application, you can [exec locally](#using) or you can see the source code in:
+
+[Front-End Source Code](https://github.com/glener10/rotating-pairs-front)
+
+[Back-End Source Code](https://github.com/glener10/rotating-pairs-back)
 
 <div id="dependenciesandenvironment"></div>
 
@@ -38,32 +44,58 @@ You can access the deployed application via the link [Rotating Pair](https://rot
 
 My dependencies and versions
 
+**Go**: go version go1.22.0 windows/amd64
+
+If you will exec in local environment, you will need the docker and docker-compose to create a MongoDb Instance:
+
+**Docker**: Docker version 25.0.3, build 4debf41
+
+**docker-compose**: Docker Compose version v2.24.5-desktop.1
+
 <div id="installing"></div>
 
 ## 🚀 **Installing**
 
+You will need a MongoDB instance:
+
 ```bash
-# installing the dependencies
-$ npm install
+# container with MongoDB instance
+$ docker-compose up -d
 ```
+
+This execution uploads a MongoDB container with some initialized limited values, you can see them in [init-mongo.js](./init-mongo.js)
 
 <div id="using"></div>
 
 ## ☕ **Using**
 
-First, run the development server:
+First, check the [dependencies](#dependenciesandenvironment) and the [installation](#installing) process:
+
+To exec you will need enter in 'src' folder:
 
 ```bash
-npm run dev
+cd src
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+And exec the _main.go_ script:
+
+```
+go run main.go
+```
+
+Now you can open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## 📖 **Learn More**
 
 To learn more about technologies used in the application:
 
-- [Documentation X](link) - learn about X features and API.
+- [Go](https://golang.org/) - learn about Go features and API.
+
+- [Versel](https://vercel.com/) - learn about Versel features and API.
+
+- [Docker](https://www.docker.com/) - learn about Docker features and API.
+
+- [Docker Compose](https://docs.docker.com/compose/) - learn about Docker Compose features and API.
 
 <div id="license"></div>
 
