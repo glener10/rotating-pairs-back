@@ -11,13 +11,16 @@ import (
 func IncrementCombinationGenerationCounter(c *gin.Context) {
 	var bodyRequisition CombinationGenerationCounterEntity.CombinationGenerationCounter
 	if err := c.ShouldBindJSON(&bodyRequisition); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Falha ao decodificar o JSON"})
+		statusCode := http.StatusUnprocessableEntity
+		c.JSON(statusCode, gin.H{"error": "Error in Json decoding", "statusCode": statusCode})
 		return
 	}
 	numberOfEntries := bodyRequisition.NumberOfEntries
 	results, err := CombinationGenerationCounterRepo.FindByNumberOfEntries(numberOfEntries)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Falha ao buscar os registros"})
+		statusCode := http.StatusUnprocessableEntity
+		errorMessage := err.Error()
+		c.JSON(statusCode, gin.H{"error": errorMessage, "statusCode": statusCode})
 		return
 	}
 	c.JSON(http.StatusOK, results)

@@ -5,6 +5,6 @@ import (
 	IncrementCombinationGenerationCounterUseCase "github.com/glener10/rotating-pairs-back/src/CombinationGenerationCounter/useCases"
 )
 
-func IncrementCombinationGenerationCounter(c *gin.Context) {
-	IncrementCombinationGenerationCounterUseCase.IncrementCombinationGenerationCounter(c)
+func IncrementCombinationGenerationCounter(r *gin.Engine) {
+	r.POST("/combinationGenerationCounter", IncrementCombinationGenerationCounterUseCase.IncrementCombinationGenerationCounter)
 }

@@ -2,11 +2,11 @@ package routes
 
 import (
 	"github.com/gin-gonic/gin"
-	CombinationGenerationCounterRoute "github.com/glener10/rotating-pairs-back/src/CombinationGenerationCounter/routes"
+	CombinationGenerationCounterController "github.com/glener10/rotating-pairs-back/src/CombinationGenerationCounter/controllers"
 )
 
 func HandlerRoutes() {
 	r := gin.Default()
-	CombinationGenerationCounterRoute.HandlerRoute(r)
+	CombinationGenerationCounterController.IncrementCombinationGenerationCounter(r)
 	r.Run()
 }
