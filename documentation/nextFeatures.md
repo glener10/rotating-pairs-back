@@ -1,12 +1,13 @@
 # General Features
 
-- Implementing IncrementTotalCombinationGenerationAccordingNumberOfEntries useCase
-- Study how to only allow Front-End permission, what other security methods will be needed, such as token, etc.
+- Study about dependency inversion in Go
+- Implementing testes of IncrementTotalCombinationGenerationAccordingNumberOfEntries useCase
 - Configure and testing CORS and security
 - Active github security: '_Security Policy_', '_Security advisories_', '_Dependabot alerts_' and '_Code scanning alerts_'
-- Implement tests
 - Configure Git Actions with pipeline jobs
 - Production application, how connect with Prod MongoDb?
+
+- Study how to only allow Front-End permission, what other security methods will be needed, such as token, etc.
 
 # Features
 
