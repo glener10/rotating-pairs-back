@@ -2,8 +2,7 @@
 
 - Study about dependency inversion in Go
 - Implementing testes of IncrementTotalCombinationGenerationAccordingNumberOfEntries useCase
-- Configure and testing CORS and security
-- Active github security: '_Security Policy_', '_Security advisories_', '_Dependabot alerts_' and '_Code scanning alerts_'
+- Configure and testing CORS
 - Configure Git Actions with pipeline jobs
 - Production application, how connect with Prod MongoDb?
 
