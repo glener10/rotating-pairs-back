@@ -13,11 +13,6 @@ import (
 )
 
 func FindByNumberOfEntries(numberOfEntries int16) (*CombinationGenerationCounterEntity.CombinationGenerationCounter, error) {
-	_, err := ValidateNumberOfEntries(numberOfEntries)
-	if err != nil {
-		return nil, err
-	}
-
 	dataBaseName := os.Getenv("MONGODB_DATABASE_NAME")
 	if dataBaseName == "" {
 		return nil, errors.New("MONGODB_DATABASE_NAME is not defined")
@@ -27,7 +22,7 @@ func FindByNumberOfEntries(numberOfEntries int16) (*CombinationGenerationCounter
 	ctx := context.TODO()
 	filter := bson.D{{Key: "NumberOfEntries", Value: numberOfEntries}}
 	var result CombinationGenerationCounterEntity.CombinationGenerationCounter
-	err = col.FindOne(ctx, filter).Decode(&result)
+	err := col.FindOne(ctx, filter).Decode(&result)
 	if err != nil {
 		return CreateCombinationGenerationCounter(numberOfEntries, col)
 	}
@@ -35,11 +30,11 @@ func FindByNumberOfEntries(numberOfEntries int16) (*CombinationGenerationCounter
 }
 
 func CreateCombinationGenerationCounter(numberOfEntries int16, col *mongo.Collection) (*CombinationGenerationCounterEntity.CombinationGenerationCounter, error) {
-	zero := int32(0)
+	one := int32(0)
 	ctx := context.TODO()
 	document := bson.M{
 		"NumberOfEntries": numberOfEntries,
-		"Count":           zero,
+		"Count":           one,
 	}
 	_, err := col.InsertOne(ctx, document)
 	if err != nil {
@@ -48,15 +43,8 @@ func CreateCombinationGenerationCounter(numberOfEntries int16, col *mongo.Collec
 
 	return &CombinationGenerationCounterEntity.CombinationGenerationCounter{
 		NumberOfEntries: numberOfEntries,
-		Count:           &zero,
+		Count:           &one,
 	}, nil
-}
-
-func ValidateNumberOfEntries(numberOfEntries int16) (*int16, error) {
-	if numberOfEntries < 1 || numberOfEntries > 20 {
-		return nil, errors.New("NumberOfEntries is more than 20 or less than 1")
-	}
-	return &numberOfEntries, nil
 }
 
 func UpdateCombinationGenerationCounter(combination *CombinationGenerationCounterEntity.CombinationGenerationCounter, col *mongo.Collection) (*CombinationGenerationCounterEntity.CombinationGenerationCounter, error) {
