@@ -3,5 +3,5 @@ POST http://localhost:8080/combinationGenerationCounter
 content-type: application/json
 
 {
-  "NumberOfEntries": 2
+  "NumberOfEntries": 5
 }

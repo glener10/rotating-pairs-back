@@ -31,7 +31,7 @@ func FindByNumberOfEntries(numberOfEntries int16) (*CombinationGenerationCounter
 	if err != nil {
 		return CreateCombinationGenerationCounter(numberOfEntries, col)
 	}
-	return &result, nil
+	return UpdateCombinationGenerationCounter(&result, col)
 }
 
 func CreateCombinationGenerationCounter(numberOfEntries int16, col *mongo.Collection) (*CombinationGenerationCounterEntity.CombinationGenerationCounter, error) {
@@ -57,4 +57,18 @@ func ValidateNumberOfEntries(numberOfEntries int16) (*int16, error) {
 		return nil, errors.New("NumberOfEntries is more than 20 or less than 1")
 	}
 	return &numberOfEntries, nil
+}
+
+func UpdateCombinationGenerationCounter(combination *CombinationGenerationCounterEntity.CombinationGenerationCounter, col *mongo.Collection) (*CombinationGenerationCounterEntity.CombinationGenerationCounter, error) {
+	ctx := context.TODO()
+	newCountOfCombination := *combination.Count + 1
+	filter := bson.D{{Key: "NumberOfEntries", Value: combination.NumberOfEntries}}
+	combination.Count = &newCountOfCombination
+	update := bson.M{"$set": bson.M{"Count": newCountOfCombination}}
+	_, err := col.UpdateOne(ctx, filter, update)
+	if err != nil {
+		return nil, errors.New("Error to increment the Combination Generation Counter with " + strconv.Itoa(int(combination.NumberOfEntries)) + " inputs")
+	}
+
+	return combination, nil
 }
