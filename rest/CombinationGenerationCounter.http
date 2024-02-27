@@ -1,0 +1,7 @@
+###CombinationGenerationCounter
+POST http://localhost:8080/combinationGenerationCounter
+content-type: application/json
+
+{
+  "NumberOfEntries": 2
+}

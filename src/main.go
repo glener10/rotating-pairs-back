@@ -1,7 +1,7 @@
 package main
 
-import "fmt"
+import "github.com/glener10/rotating-pairs-back/src/routes"
 
 func main() {
-	fmt.Println("Hello, World!")
+	routes.HandlerRoutes()
 }
