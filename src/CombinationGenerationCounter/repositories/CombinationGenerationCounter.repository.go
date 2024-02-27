@@ -5,16 +5,11 @@ import (
 	"errors"
 	"os"
 
-	"github.com/joho/godotenv"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 func Connect() (*mongo.Collection, error) {
-	err := godotenv.Load("../../../")
-	if err != nil {
-		return nil, errors.New("Erro to load environment variables")
-	}
 
 	mongoURI := os.Getenv("MONGODB_URI")
 	if mongoURI == "" {
@@ -26,7 +21,16 @@ func Connect() (*mongo.Collection, error) {
 		return nil, err
 	}
 
-	coll := client.Database("test").Collection("TotalCombinationGenerationAccordingNumberOfEntries")
+	dataBaseName := os.Getenv("MONGODB_DATABASE_NAME")
+	if dataBaseName == "" {
+		return nil, errors.New("MONGODB_DATABASE_NAME is not defined")
+	}
+
+	coll := client.Database(dataBaseName).Collection("TotalCombinationGenerationAccordingNumberOfEntries")
+
+	if coll == nil {
+		return nil, errors.New("Error to connect database!")
+	}
 
 	return coll, nil
 }
