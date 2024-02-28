@@ -16,7 +16,7 @@ jobs:
       - name: Run golangci-lint
         uses: golangci/golangci-lint-action@v4.0.0
         with:
-          version: 'latest'
+          version: "latest"
 
   build:
     name: Build
@@ -27,9 +27,30 @@ jobs:
 
       - name: Setup Go environment
         uses: actions/setup-go@v5.0.0
-        with:
-          go-version: 'latest'
 
       - name: Run Go Build
-        run: go build ./src
+        run: |
+          cd src
+          go build
 
+  test:
+    name: Test
+    needs: build
+    runs-on: "ubuntu-latest"
+    env:
+      MONGODB_URI: mongodb://localhost:27017
+      MONGODB_DATABASE_NAME: test
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Go environment
+        uses: actions/setup-go@v5.0.0
+
+      - name: Start MongoDB
+        run: docker-compose up -d
+
+      - name: Run Tests
+        run: go test ./src/...
+
+      - name: Remove MongoDB container
+        run: docker-compose down
