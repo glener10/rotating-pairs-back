@@ -92,7 +92,7 @@ And exec the _main.go_ script:
 go run main.go
 ```
 
-Now you can open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Now you can open [http://localhost:8080](http://localhost:8080) with your browser to see the result.
 
 ## 📖 **Learn More**
 
