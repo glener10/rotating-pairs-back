@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 
-	CombinationGenerationCounterEntity "github.com/glener10/rotating-pairs-back/src/CombinationGenerationCounter/entities"
 	CommonRepository "github.com/glener10/rotating-pairs-back/src/common/repositories"
 	"go.mongodb.org/mongo-driver/bson"
 )
@@ -36,19 +35,25 @@ func PopulateCollection() error {
 	collectionName := "TotalCombinationGenerationAccordingNumberOfEntries"
 	col, err := CommonRepository.Connect(collectionName)
 	if err != nil {
-		return errors.New(err.Error())
+		return errors.New("failed to connect to database: " + err.Error())
 	}
 
 	one := int32(1)
-	documents := []CombinationGenerationCounterEntity.CombinationGenerationCounter{
-		{NumberOfEntries: 1, Count: &one},
-		{NumberOfEntries: 2, Count: &one},
+	documents := []bson.M{
+		{
+			"NumberOfEntries": 1,
+			"Count":           one,
+		},
+		{
+			"NumberOfEntries": 2,
+			"Count":           one,
+		},
 	}
 
 	for _, doc := range documents {
 		_, err := col.InsertOne(context.Background(), doc)
 		if err != nil {
-			return errors.New("Error to Insert in 'TotalCombinationGenerationAccordingNumberOfEntries' collection:" + err.Error())
+			return errors.New("failed to insert document: " + err.Error())
 		}
 	}
 	return nil
