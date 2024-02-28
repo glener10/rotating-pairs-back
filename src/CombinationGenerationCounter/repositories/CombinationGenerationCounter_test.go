@@ -1,6 +1,7 @@
 package CombinationGenerationCounterRepo
 
 import (
+	"os"
 	"testing"
 
 	CombinationGenerationCounterEntity "github.com/glener10/rotating-pairs-back/src/CombinationGenerationCounter/entities"
@@ -8,9 +9,13 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestCreateCombinationGenerationCounter(t *testing.T) {
+func TestMain(m *testing.M) {
 	_ = Utils.LoadEnvironmentVariables()
+	exitCode := m.Run()
+	os.Exit(exitCode)
+}
 
+func TestCreateCombinationGenerationCounter(t *testing.T) {
 	result, _ := CreateCombinationGenerationCounter(3)
 
 	one := int32(1)
