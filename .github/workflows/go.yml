@@ -11,7 +11,7 @@ jobs:
     name: Lint
     runs-on: "ubuntu-latest"
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4.1.1
 
       - name: Run golangci-lint
         uses: golangci/golangci-lint-action@v4.0.0
@@ -23,7 +23,7 @@ jobs:
     needs: lint
     runs-on: "ubuntu-latest"
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4.1.1
 
       - name: Setup Go environment
         uses: actions/setup-go@v5.0.0
@@ -41,7 +41,7 @@ jobs:
       MONGODB_URI: mongodb://localhost:27017
       MONGODB_DATABASE_NAME: test
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4.1.1
 
       - name: Setup Go environment
         uses: actions/setup-go@v5.0.0
