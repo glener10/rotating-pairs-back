@@ -3,34 +3,34 @@ package CombinationGenerationCounterRepo
 import (
 	"context"
 	"errors"
-	"os"
 	"strconv"
 
 	CombinationGenerationCounterEntity "github.com/glener10/rotating-pairs-back/src/CombinationGenerationCounter/entities"
 	CommonRepository "github.com/glener10/rotating-pairs-back/src/common/repositories"
 	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/mongo"
 )
 
 func FindByNumberOfEntries(numberOfEntries int16) (*CombinationGenerationCounterEntity.CombinationGenerationCounter, error) {
-	dataBaseName := os.Getenv("MONGODB_DATABASE_NAME")
-	if dataBaseName == "" {
-		return nil, errors.New("MONGODB_DATABASE_NAME is not defined")
-	}
-	col, _ := CommonRepository.Connect(dataBaseName)
+	collectionName := "TotalCombinationGenerationAccordingNumberOfEntries"
+	col, _ := CommonRepository.Connect(collectionName)
 	defer CommonRepository.Disconnect(col)
+
 	ctx := context.TODO()
 	filter := bson.D{{Key: "NumberOfEntries", Value: numberOfEntries}}
 	var result CombinationGenerationCounterEntity.CombinationGenerationCounter
 	err := col.FindOne(ctx, filter).Decode(&result)
 	if err != nil {
-		return CreateCombinationGenerationCounter(numberOfEntries, col)
+		return nil, errors.New("Error to find a Combination Generation Counter with " + strconv.Itoa(int(numberOfEntries)) + " inputs")
 	}
-	return UpdateCombinationGenerationCounter(&result, col)
+	return &result, nil
 }
 
-func CreateCombinationGenerationCounter(numberOfEntries int16, col *mongo.Collection) (*CombinationGenerationCounterEntity.CombinationGenerationCounter, error) {
-	one := int32(0)
+func CreateCombinationGenerationCounter(numberOfEntries int16) (*CombinationGenerationCounterEntity.CombinationGenerationCounter, error) {
+	collectionName := "TotalCombinationGenerationAccordingNumberOfEntries"
+	col, _ := CommonRepository.Connect(collectionName)
+	defer CommonRepository.Disconnect(col)
+
+	one := int32(1)
 	ctx := context.TODO()
 	document := bson.M{
 		"NumberOfEntries": numberOfEntries,
@@ -47,7 +47,11 @@ func CreateCombinationGenerationCounter(numberOfEntries int16, col *mongo.Collec
 	}, nil
 }
 
-func UpdateCombinationGenerationCounter(combination *CombinationGenerationCounterEntity.CombinationGenerationCounter, col *mongo.Collection) (*CombinationGenerationCounterEntity.CombinationGenerationCounter, error) {
+func IncrementCombinationGenerationCounter(combination *CombinationGenerationCounterEntity.CombinationGenerationCounter) (*CombinationGenerationCounterEntity.CombinationGenerationCounter, error) {
+	collectionName := "TotalCombinationGenerationAccordingNumberOfEntries"
+	col, _ := CommonRepository.Connect(collectionName)
+	defer CommonRepository.Disconnect(col)
+
 	ctx := context.TODO()
 	newCountOfCombination := *combination.Count + 1
 	filter := bson.D{{Key: "NumberOfEntries", Value: combination.NumberOfEntries}}

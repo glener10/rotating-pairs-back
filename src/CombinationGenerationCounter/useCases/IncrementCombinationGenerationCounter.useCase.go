@@ -12,10 +12,23 @@ func IncrementCombinationGenerationCounter(c *gin.Context, bodyRequisition Combi
 	numberOfEntries := bodyRequisition.NumberOfEntries
 	results, err := CombinationGenerationCounterRepo.FindByNumberOfEntries(numberOfEntries)
 	if err != nil {
+		results, err = CombinationGenerationCounterRepo.CreateCombinationGenerationCounter(numberOfEntries)
+		if err != nil {
+			statusCode := http.StatusUnprocessableEntity
+			errorMessage := err.Error()
+			c.JSON(statusCode, gin.H{"error": errorMessage, "statusCode": statusCode})
+			return
+		}
+		c.JSON(http.StatusOK, results)
+		return
+	}
+	results, err = CombinationGenerationCounterRepo.IncrementCombinationGenerationCounter(results)
+	if err != nil {
 		statusCode := http.StatusUnprocessableEntity
 		errorMessage := err.Error()
 		c.JSON(statusCode, gin.H{"error": errorMessage, "statusCode": statusCode})
 		return
 	}
 	c.JSON(http.StatusOK, results)
+	return
 }

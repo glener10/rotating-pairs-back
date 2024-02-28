@@ -10,7 +10,12 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-func Connect(dataBaseName string) (*mongo.Collection, error) {
+func Connect(collectionName string) (*mongo.Collection, error) {
+	dataBaseName := os.Getenv("MONGODB_DATABASE_NAME")
+	if dataBaseName == "" {
+		return nil, errors.New("MONGODB_DATABASE_NAME is not defined")
+	}
+
 	mongoURI := os.Getenv("MONGODB_URI")
 	if mongoURI == "" {
 		return nil, errors.New("MONGODB_URI is not defined")
@@ -20,7 +25,7 @@ func Connect(dataBaseName string) (*mongo.Collection, error) {
 		return nil, err
 	}
 
-	coll := client.Database(dataBaseName).Collection("TotalCombinationGenerationAccordingNumberOfEntries")
+	coll := client.Database(dataBaseName).Collection(collectionName)
 	return coll, nil
 }
 
