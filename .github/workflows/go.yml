@@ -50,7 +50,7 @@ jobs:
         run: docker-compose up -d
 
       - name: Run Tests
-        run: go test
+        run: go test ./src/...
 
       - name: Remove MongoDB container
         run: docker-compose down
