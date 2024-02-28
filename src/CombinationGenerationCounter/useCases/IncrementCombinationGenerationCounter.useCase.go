@@ -30,5 +30,4 @@ func IncrementCombinationGenerationCounter(c *gin.Context, bodyRequisition Combi
 		return
 	}
 	c.JSON(http.StatusOK, results)
-	return
 }
