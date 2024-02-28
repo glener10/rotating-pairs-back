@@ -68,9 +68,7 @@ $ docker-compose up -d
 
 This execution uploads a MongoDB container with some initialized limited values, you can see them in [init-mongo.js](./init-mongo.js)
 
-You will need to a _.env_ file inside 'src' folder
-
-/src/.env
+You will need to a _.env_ file in root folder
 
 ```env
 MONGODB_URI=mongodb://localhost:27017
