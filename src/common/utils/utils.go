@@ -6,8 +6,7 @@ import (
 	"github.com/joho/godotenv"
 )
 
-func LoadEnvironmentVariables() error {
-	pathToEnv := "../../.env"
+func LoadEnvironmentVariables(pathToEnv string) error {
 	if _, err := os.Stat(pathToEnv); os.IsNotExist(err) {
 		return nil
 	}

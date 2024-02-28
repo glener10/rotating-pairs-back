@@ -1,10 +1,11 @@
 # **Rotating Pairs Back-End**
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/glener10/rotating-pairs-back)
-![GitHub forks](https://img.shields.io/github/forks/glener10/rotating-pairs-back)
 ![Bitbucket open issues](https://img.shields.io/bitbucket/issues/glener10/rotating-pairs-back)
 ![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/glener10/rotating-pairs-back)
 ![Contributors](https://img.shields.io/github/contributors/glener10/rotating-pairs-back.svg)
+![Build Status](https://github.com/glener10/rotating-pairs-back/workflows/go/badge.svg)
+[![License](https://img.shields.io/github/license/glener10/rotating-pairs-back)](/LICENSE)
 
 <p align="center"> 🚀 Back-End of Rotating Pairs Web Application. Responsible for returning the positions of combinations used in the application and saving monitoring logs. </p>
 
@@ -17,6 +18,8 @@
 👉 [Dependencies and Environment](#dependenciesandenvironment)
 
 👉 [Installing](#installing)
+
+👉 [Testing](#testing)
 
 👉 [Using](#using)
 
@@ -72,6 +75,18 @@ You will need to a _.env_ file inside 'src' folder
 ```env
 MONGODB_URI=mongodb://localhost:27017
 MONGODB_DATABASE_NAME=test
+```
+
+<div id="testing"></div>
+
+## 🧪 **Testing**
+
+**OBSERVATION**: To run the tests, [MongoDB](#installing) must be running
+
+A truncate script is executed each time the tests are run and the database is reset to an initial state with limited data values. That is, if you are working and running the tests, the data will be lost.
+
+```
+go test ./src/...
 ```
 
 <div id="using"></div>

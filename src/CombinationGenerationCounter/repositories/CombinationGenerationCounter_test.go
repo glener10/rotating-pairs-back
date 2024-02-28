@@ -1,6 +1,7 @@
 package CombinationGenerationCounterRepo
 
 import (
+	"log"
 	"os"
 	"testing"
 
@@ -10,8 +11,16 @@ import (
 )
 
 func TestMain(m *testing.M) {
-	_ = Utils.LoadEnvironmentVariables()
+	if err := Utils.LoadEnvironmentVariables("../../.env"); err != nil {
+		log.Fatalf("Error to load environment variables: %s", err.Error())
+	}
+	if err := Truncate(); err != nil {
+		log.Fatalf("Error to exec truncate method before repository tests execution: %s", err.Error())
+	}
 	exitCode := m.Run()
+	if err := CleanCollection(); err != nil {
+		log.Fatalf("Error to exec cleaning collection after repository tests execution: %s", err.Error())
+	}
 	os.Exit(exitCode)
 }
 
