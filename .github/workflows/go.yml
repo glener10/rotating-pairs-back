@@ -25,9 +25,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Setup Go environment
-        uses: actions/setup-go@v5.0.0
-
       - name: Run Go Build
         run: |
           cd src
