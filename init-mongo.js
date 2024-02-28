@@ -1,6 +1,6 @@
 db.createCollection('TotalCombinationGenerationAccordingNumberOfEntries');
 
 db.TotalCombinationGenerationAccordingNumberOfEntries.insertMany([
-  { numberOfEntries: 1, count: 0 },
-  { numberOfEntries: 2, count: 0 }
+  { NumberOfEntries: 1, Count: 0 },
+  { NumberOfEntries: 2, Count: 0 }
 ]);
