@@ -1,0 +1,19 @@
+name: go
+
+on:
+  push:
+    branches: ["master", "desenv"]
+  pull_request:
+    branches: ["master", "desenv"]
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run golangci-lint
+        uses: golangci/golangci-lint-action@v4.0.0
+        with:
+          version: 'latest'
