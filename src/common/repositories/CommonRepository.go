@@ -3,6 +3,7 @@ package CommonRepository
 import (
 	"context"
 	"errors"
+	"fmt"
 	"os"
 
 	"go.mongodb.org/mongo-driver/mongo"
@@ -23,11 +24,10 @@ func Connect(dataBaseName string) (*mongo.Collection, error) {
 	return coll, nil
 }
 
-func Disconnect(collection *mongo.Collection) error {
+func Disconnect(collection *mongo.Collection) {
 	client := collection.Database().Client()
 	err := client.Disconnect(context.TODO())
 	if err != nil {
-		return err
+		fmt.Println("Error to disconnect database.")
 	}
-	return nil
 }
