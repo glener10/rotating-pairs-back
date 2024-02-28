@@ -3,3 +3,4 @@
 - Implementing IncrementTotalCombinationGenerationAccordingNumberOfEntries useCase
 - Create CI/CD GitHub Actions procedure
 - Config setup tests
+- Integration tests with CombinationGenerationCounter and MongoDb

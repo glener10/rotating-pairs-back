@@ -1,7 +1,7 @@
 # General Features
 
 - Study about dependency inversion in Go
-- Implementing testes of IncrementTotalCombinationGenerationAccordingNumberOfEntries useCase
+- Implementing e2e testes of IncrementTotalCombinationGenerationAccordingNumberOfEntries useCase
 - Implementing swagger IncrementTotalCombinationGenerationAccordingNumberOfEntries
 - Configure and testing CORS
 - Production application, how connect with Prod MongoDb?
