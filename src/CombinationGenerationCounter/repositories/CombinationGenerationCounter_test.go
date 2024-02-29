@@ -30,40 +30,40 @@ func TestCreateCombinationGenerationCounter(t *testing.T) {
 
 	one := int32(1)
 	expectedObject := &CombinationGenerationCounterEntity.CombinationGenerationCounter{
-		NumberOfEntries: 3,
-		Count:           &one,
+		NumberOfInputs: 3,
+		Count:          &one,
 	}
 
 	assert.Equal(t, result, expectedObject, "The create object need to be equal to expected object")
 }
 
-func TestFindByNumberOfEntries(t *testing.T) {
-	result, _ := FindByNumberOfEntries(2)
+func TestFindByNumberOfInputs(t *testing.T) {
+	result, _ := FindByNumberOfInputs(2)
 
 	one := int32(1)
 	expectedObject := &CombinationGenerationCounterEntity.CombinationGenerationCounter{
-		NumberOfEntries: 2,
-		Count:           &one,
+		NumberOfInputs: 2,
+		Count:          &one,
 	}
 
 	assert.Equal(t, result, expectedObject, "The object finded in MongoDB needs to be the expected object")
 }
 
-func TestFindByNumberOfEntriesInCaseDoentsFindTheCombination(t *testing.T) {
-	_, err := FindByNumberOfEntries(5)
+func TestFindByNumberOfInputsInCaseDoentsFindTheCombination(t *testing.T) {
+	_, err := FindByNumberOfInputs(5)
 
 	assert.Equal(t, err.Error(), "Error to find a Combination Generation Counter with 5 inputs", "The error message need to be equal to expected error message")
 }
 
 func TestIncrementCombinationGenerationCounter(t *testing.T) {
-	result, _ := FindByNumberOfEntries(1)
+	result, _ := FindByNumberOfInputs(1)
 	_, _ = IncrementCombinationGenerationCounter(result)
-	result, _ = FindByNumberOfEntries(1)
+	result, _ = FindByNumberOfInputs(1)
 
 	two := int32(2)
 	expectedObject := &CombinationGenerationCounterEntity.CombinationGenerationCounter{
-		NumberOfEntries: 1,
-		Count:           &two,
+		NumberOfInputs: 1,
+		Count:          &two,
 	}
 
 	assert.Equal(t, result, expectedObject, "The count of combination generation with '1' NumberOfInputs should be incremented to 2")
@@ -79,13 +79,13 @@ func TestListAllCombinationsCounters(t *testing.T) {
 	_, _ = IncrementCombinationGenerationCounter(combinationTwo)
 	three := int32(3)
 	firstExpectededObject := CombinationGenerationCounterEntity.CombinationGenerationCounter{
-		NumberOfEntries: 2,
-		Count:           &three,
+		NumberOfInputs: 2,
+		Count:          &three,
 	}
 	one := int32(1)
 	secondExpectededObject := CombinationGenerationCounterEntity.CombinationGenerationCounter{
-		NumberOfEntries: 1,
-		Count:           &one,
+		NumberOfInputs: 1,
+		Count:          &one,
 	}
 
 	result, _ := ListAllCombinationsCounters()

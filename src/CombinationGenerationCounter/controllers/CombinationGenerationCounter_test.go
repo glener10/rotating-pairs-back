@@ -23,7 +23,7 @@ type ErrorResponse struct {
 }
 
 type BodyRequest struct {
-	NumberOfEntries int16 `json:"NumberOfEntries"`
+	NumberOfInputs int16 `json:"NumberOfInputs"`
 }
 
 func TestMain(m *testing.M) {
@@ -71,7 +71,7 @@ func TestIncrementRouteWitNumberOfInputsMoreThanTwenty(t *testing.T) {
 	r.POST("/combinationGenerationCounter", IncrementCombinationGenerationCounter)
 
 	body := BodyRequest{
-		NumberOfEntries: 25,
+		NumberOfInputs: 25,
 	}
 	bodyConverted, _ := json.Marshal(body)
 	req, _ := http.NewRequest("POST", "/combinationGenerationCounter", bytes.NewBuffer(bodyConverted))
@@ -79,7 +79,7 @@ func TestIncrementRouteWitNumberOfInputsMoreThanTwenty(t *testing.T) {
 	r.ServeHTTP(response, req)
 
 	expected := ErrorResponse{
-		Error:      "NumberOfEntries is more than 20 or less than 1",
+		Error:      "NumberOfInputs is more than 20 or less than 1",
 		StatusCode: 422,
 	}
 
@@ -89,7 +89,7 @@ func TestIncrementRouteWitNumberOfInputsMoreThanTwenty(t *testing.T) {
 		t.Errorf("failed to decode response body: %v", err)
 	}
 
-	assert.Equal(t, expected, actual, "Should return 'NumberOfEntries is more than 20 or less than 1' and 422 if the NumberOfInputs in body is more than 20")
+	assert.Equal(t, expected, actual, "Should return 'NumberOfInputs is more than 20 or less than 1' and 422 if the NumberOfInputs in body is more than 20")
 }
 
 func TestIncrementRouteWitNumberOfInputsLessThanZero(t *testing.T) {
@@ -97,7 +97,7 @@ func TestIncrementRouteWitNumberOfInputsLessThanZero(t *testing.T) {
 	r.POST("/combinationGenerationCounter", IncrementCombinationGenerationCounter)
 
 	body := BodyRequest{
-		NumberOfEntries: -1,
+		NumberOfInputs: -1,
 	}
 	bodyConverted, _ := json.Marshal(body)
 	req, _ := http.NewRequest("POST", "/combinationGenerationCounter", bytes.NewBuffer(bodyConverted))
@@ -105,7 +105,7 @@ func TestIncrementRouteWitNumberOfInputsLessThanZero(t *testing.T) {
 	r.ServeHTTP(response, req)
 
 	expected := ErrorResponse{
-		Error:      "NumberOfEntries is more than 20 or less than 1",
+		Error:      "NumberOfInputs is more than 20 or less than 1",
 		StatusCode: 422,
 	}
 
@@ -115,7 +115,7 @@ func TestIncrementRouteWitNumberOfInputsLessThanZero(t *testing.T) {
 		t.Errorf("failed to decode response body: %v", err)
 	}
 
-	assert.Equal(t, expected, actual, "Should return 'NumberOfEntries is more than 20 or less than 1' and 422 if the NumberOfInputs in body is less tha 0")
+	assert.Equal(t, expected, actual, "Should return 'NumberOfInputs is more than 20 or less than 1' and 422 if the NumberOfInputs in body is less tha 0")
 }
 
 func TestIncrementRouteSuccessCase(t *testing.T) {
@@ -123,7 +123,7 @@ func TestIncrementRouteSuccessCase(t *testing.T) {
 	r.POST("/combinationGenerationCounter", IncrementCombinationGenerationCounter)
 
 	body := BodyRequest{
-		NumberOfEntries: 2,
+		NumberOfInputs: 2,
 	}
 	bodyConverted, _ := json.Marshal(body)
 	req, _ := http.NewRequest("POST", "/combinationGenerationCounter", bytes.NewBuffer(bodyConverted))
@@ -132,8 +132,8 @@ func TestIncrementRouteSuccessCase(t *testing.T) {
 
 	two := int32(2)
 	expected := CombinationGenerationCounterEntity.CombinationGenerationCounter{
-		Count:           &two,
-		NumberOfEntries: 2,
+		Count:          &two,
+		NumberOfInputs: 2,
 	}
 
 	var actual CombinationGenerationCounterEntity.CombinationGenerationCounter
@@ -163,13 +163,13 @@ func TestListAllCombinationsCountersRouteSuccessCase(t *testing.T) {
 
 	three := int32(3)
 	firstExpectededObject := CombinationGenerationCounterEntity.CombinationGenerationCounter{
-		NumberOfEntries: 2,
-		Count:           &three,
+		NumberOfInputs: 2,
+		Count:          &three,
 	}
 	one := int32(1)
 	secondExpectededObject := CombinationGenerationCounterEntity.CombinationGenerationCounter{
-		NumberOfEntries: 1,
-		Count:           &one,
+		NumberOfInputs: 1,
+		Count:          &one,
 	}
 
 	var actual []CombinationGenerationCounterEntity.CombinationGenerationCounter

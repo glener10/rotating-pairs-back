@@ -19,20 +19,20 @@ func Truncate() error {
 }
 
 func CleanCollection() error {
-	collectionName := "TotalCombinationGenerationAccordingNumberOfEntries"
+	collectionName := "TotalCombinationGenerationAccordingNumberOfInputs"
 	col, err := CommonRepository.Connect(collectionName)
 	if err != nil {
 		return errors.New(err.Error())
 	}
 	_, err = col.DeleteMany(context.Background(), bson.M{})
 	if err != nil {
-		return errors.New("Error to DeleteMany in 'TotalCombinationGenerationAccordingNumberOfEntries' collection:" + err.Error())
+		return errors.New("Error to DeleteMany in 'TotalCombinationGenerationAccordingNumberOfInputs' collection:" + err.Error())
 	}
 	return nil
 }
 
 func PopulateCollection() error {
-	collectionName := "TotalCombinationGenerationAccordingNumberOfEntries"
+	collectionName := "TotalCombinationGenerationAccordingNumberOfInputs"
 	col, err := CommonRepository.Connect(collectionName)
 	if err != nil {
 		return errors.New("failed to connect to database: " + err.Error())
@@ -41,12 +41,12 @@ func PopulateCollection() error {
 	one := int32(1)
 	documents := []bson.M{
 		{
-			"NumberOfEntries": 1,
-			"Count":           one,
+			"NumberOfInputs": 1,
+			"Count":          one,
 		},
 		{
-			"NumberOfEntries": 2,
-			"Count":           one,
+			"NumberOfInputs": 2,
+			"Count":          one,
 		},
 	}
 
