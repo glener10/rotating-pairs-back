@@ -2,7 +2,7 @@
 
 - Study about dependency inversion in Go
 - Implementing swagger IncrementTotalCombinationGenerationAccordingNumberOfInputs
-- Implementing Combinations useCase, tests and documentation
+- Implementing Combinations documentation
 - Production application, how connect with Prod MongoDb?
 - Study how to only allow Front-End permission, what other security methods will be needed, such as token, etc.
 
