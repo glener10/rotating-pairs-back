@@ -4,8 +4,8 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	IncrementCombinationGenerationCounterUseCase "github.com/glener10/rotating-pairs-back/src/CombinationGenerationCounter/CombinationGenerationCounterUseCases"
 	CombinationGenerationCounterEntity "github.com/glener10/rotating-pairs-back/src/CombinationGenerationCounter/entities"
+	CombinationGenerationCounterUseCases "github.com/glener10/rotating-pairs-back/src/CombinationGenerationCounter/useCases"
 )
 
 func IncrementCombinationGenerationCounter(c *gin.Context) {
@@ -21,9 +21,9 @@ func IncrementCombinationGenerationCounter(c *gin.Context) {
 		return
 	}
 
-	IncrementCombinationGenerationCounterUseCase.IncrementCombinationGenerationCounter(c, combination)
+	CombinationGenerationCounterUseCases.IncrementCombinationGenerationCounter(c, combination)
 }
 
 func ListAllCombinationsCounters(c *gin.Context) {
-	IncrementCombinationGenerationCounterUseCase.ListAllCombinationsCounters(c)
+	CombinationGenerationCounterUseCases.ListAllCombinationsCounters(c)
 }
