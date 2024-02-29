@@ -1,7 +1,7 @@
 # General Features
 
 - Study about dependency inversion in Go
-- Implementing swagger IncrementTotalCombinationGenerationAccordingNumberOfEntries
+- Implementing swagger IncrementTotalCombinationGenerationAccordingNumberOfInputs
 - Configure and testing CORS
 - Production application, how connect with Prod MongoDb?
 
