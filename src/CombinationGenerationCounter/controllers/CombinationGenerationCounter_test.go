@@ -79,7 +79,7 @@ func TestIncrementRouteWitNumberOfInputsMoreThanTwenty(t *testing.T) {
 	r.ServeHTTP(response, req)
 
 	expected := ErrorResponse{
-		Error:      "NumberOfInputs is more than 20 or less than 1",
+		Error:      "NumberOfInputs is more than 20 or less than 2",
 		StatusCode: 422,
 	}
 
@@ -89,7 +89,7 @@ func TestIncrementRouteWitNumberOfInputsMoreThanTwenty(t *testing.T) {
 		t.Errorf("failed to decode response body: %v", err)
 	}
 
-	assert.Equal(t, expected, actual, "Should return 'NumberOfInputs is more than 20 or less than 1' and 422 if the NumberOfInputs in body is more than 20")
+	assert.Equal(t, expected, actual, "Should return 'NumberOfInputs is more than 20 or less than 2' and 422 if the NumberOfInputs in body is more than 20")
 }
 
 func TestIncrementRouteWitNumberOfInputsLessThanZero(t *testing.T) {
@@ -105,7 +105,7 @@ func TestIncrementRouteWitNumberOfInputsLessThanZero(t *testing.T) {
 	r.ServeHTTP(response, req)
 
 	expected := ErrorResponse{
-		Error:      "NumberOfInputs is more than 20 or less than 1",
+		Error:      "NumberOfInputs is more than 20 or less than 2",
 		StatusCode: 422,
 	}
 
@@ -115,7 +115,7 @@ func TestIncrementRouteWitNumberOfInputsLessThanZero(t *testing.T) {
 		t.Errorf("failed to decode response body: %v", err)
 	}
 
-	assert.Equal(t, expected, actual, "Should return 'NumberOfInputs is more than 20 or less than 1' and 422 if the NumberOfInputs in body is less tha 0")
+	assert.Equal(t, expected, actual, "Should return 'NumberOfInputs is more than 20 or less than 2' and 422 if the NumberOfInputs in body is less tha 0")
 }
 
 func TestIncrementRouteSuccessCase(t *testing.T) {

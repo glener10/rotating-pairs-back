@@ -8,8 +8,8 @@ type CombinationGenerationCounter struct {
 }
 
 func Validate(combination *CombinationGenerationCounter) error {
-	if combination.NumberOfInputs < 1 || combination.NumberOfInputs > 20 {
-		return errors.New("NumberOfInputs is more than 20 or less than 1")
+	if combination.NumberOfInputs < 2 || combination.NumberOfInputs > 20 {
+		return errors.New("NumberOfInputs is more than 20 or less than 2")
 	}
 	return nil
 }
