@@ -4,3 +4,4 @@
 - Create CI/CD GitHub Actions procedure
 - Config setup tests
 - Integration tests with CombinationGenerationCounter and MongoDb
+- E2E tests

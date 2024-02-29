@@ -10,7 +10,8 @@ import (
 
 func HandlerRoutes() {
 	r := gin.Default()
-	CombinationGenerationCounterController.IncrementCombinationGenerationCounter(r)
+	r.POST("/combinationGenerationCounter", CombinationGenerationCounterController.IncrementCombinationGenerationCounter)
+
 	err := r.Run()
 	if err != nil {
 		fmt.Println("Error to up routes")
