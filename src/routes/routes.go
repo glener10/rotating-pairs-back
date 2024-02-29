@@ -8,6 +8,7 @@ import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	CombinationGenerationCounterController "github.com/glener10/rotating-pairs-back/src/CombinationGenerationCounter/controllers"
+	CombinationController "github.com/glener10/rotating-pairs-back/src/Combinations/controllers"
 )
 
 func GetAllowedURLs() []string {
@@ -32,6 +33,7 @@ func HandlerRoutes() {
 
 	r.POST("/combinationGenerationCounter", CombinationGenerationCounterController.IncrementCombinationGenerationCounter)
 	r.GET("/combinationGenerationCounter", CombinationGenerationCounterController.ListAllCombinationsCounters)
+	r.POST("/combination", CombinationController.Combination)
 
 	err := r.Run()
 	if err != nil {

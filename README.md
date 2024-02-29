@@ -38,11 +38,7 @@ Returning the positions of combinations used in the application (Limited beetwen
 
 You can access the production Front-End application via the link [Rotating Pair](https://rotatingpairs.online)
 
-The Back-End production version is open only to Front-End application, you can [exec locally](#using) or you can see the source code in:
-
-[Front-End Source Code](https://github.com/glener10/rotating-pairs-front)
-
-[Back-End Source Code](https://github.com/glener10/rotating-pairs-back)
+The Back-End production version is open only to Front-End application, you can [exec locally](#using). The front-end source code is in the [link](https://github.com/glener10/rotating-pairs-front)
 
 <div id="dependenciesandenvironment"></div>
 
