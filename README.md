@@ -84,7 +84,7 @@ ALLOW_URLS=*
 A truncate script is executed each time the tests are run and the database is reset to an initial state with limited data values. That is, if you are working and running the tests, the data will be lost.
 
 ```
-go test ./src/...
+go test -p 1 ./src/...
 ```
 
 <div id="using"></div>
