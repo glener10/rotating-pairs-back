@@ -87,12 +87,11 @@ func TestListAllCombinationsCounters(t *testing.T) {
 		NumberOfEntries: 1,
 		Count:           &one,
 	}
-	expectedResult := []CombinationGenerationCounterEntity.CombinationGenerationCounter{firstExpectededObject, secondExpectededObject}
 
 	result, _ := ListAllCombinationsCounters()
 
-	assert.Equal(t, len(*result), len(expectedResult), "Slice length should be equal")
-	for i := range expectedResult {
-		assert.Equal(t, (*result)[i], expectedResult[i], "Element should be equal")
-	}
+	assert.Equal(t, len(*result), 2, "Slice length should be equal")
+	assert.Equal(t, (*result)[0], firstExpectededObject, "Element should be equal")
+	assert.Equal(t, (*result)[1], secondExpectededObject, "Element should be equal")
+
 }
