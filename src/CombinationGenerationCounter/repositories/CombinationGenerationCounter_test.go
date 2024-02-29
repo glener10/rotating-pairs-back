@@ -55,7 +55,7 @@ func TestFindByNumberOfInputsInCaseDoentsFindTheCombination(t *testing.T) {
 
 func TestIncrementCombinationGenerationCounter(t *testing.T) {
 	result, _ := FindByNumberOfInputs(1)
-	_, _ = IncrementCombinationGenerationCounter(result)
+	_, _ = IncrementCombinationGenerationCounter(1)
 	result, _ = FindByNumberOfInputs(1)
 
 	expectedObject := &CombinationGenerationCounterEntity.CombinationGenerationCounter{
@@ -71,9 +71,9 @@ func TestListAllCombinationsCounters(t *testing.T) {
 		log.Fatalf("Error to exec cleaning collection after repository tests execution: %s", err.Error())
 	}
 	_, _ = CreateCombinationGenerationCounter(1)
-	combinationTwo, _ := CreateCombinationGenerationCounter(2)
-	_, _ = IncrementCombinationGenerationCounter(combinationTwo)
-	_, _ = IncrementCombinationGenerationCounter(combinationTwo)
+	_, _ = CreateCombinationGenerationCounter(2)
+	_, _ = IncrementCombinationGenerationCounter(2)
+	_, _ = IncrementCombinationGenerationCounter(2)
 	firstExpectededObject := CombinationGenerationCounterEntity.CombinationGenerationCounter{
 		NumberOfInputs: 2,
 		Count:          3,

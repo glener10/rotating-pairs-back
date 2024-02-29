@@ -22,7 +22,7 @@ func IncrementCombinationGenerationCounter(c *gin.Context, combinationRequest Co
 		c.JSON(http.StatusOK, results)
 		return
 	}
-	results, err = CombinationGenerationCounterRepo.IncrementCombinationGenerationCounter(results)
+	results, err = CombinationGenerationCounterRepo.IncrementCombinationGenerationCounter(NumberOfInputs)
 	if err != nil {
 		statusCode := http.StatusUnprocessableEntity
 		errorMessage := err.Error()

@@ -150,9 +150,9 @@ func TestListAllCombinationsCountersRouteSuccessCase(t *testing.T) {
 	}
 
 	_, _ = CombinationGenerationCounterRepo.CreateCombinationGenerationCounter(1)
-	combinationTwo, _ := CombinationGenerationCounterRepo.CreateCombinationGenerationCounter(2)
-	_, _ = CombinationGenerationCounterRepo.IncrementCombinationGenerationCounter(combinationTwo)
-	_, _ = CombinationGenerationCounterRepo.IncrementCombinationGenerationCounter(combinationTwo)
+	_, _ = CombinationGenerationCounterRepo.CreateCombinationGenerationCounter(2)
+	_, _ = CombinationGenerationCounterRepo.IncrementCombinationGenerationCounter(2)
+	_, _ = CombinationGenerationCounterRepo.IncrementCombinationGenerationCounter(2)
 
 	r := SetupRoutes()
 	r.GET("/combinationGenerationCounter", ListAllCombinationsCounters)

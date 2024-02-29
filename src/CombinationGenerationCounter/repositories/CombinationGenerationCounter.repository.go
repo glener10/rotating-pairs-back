@@ -52,7 +52,7 @@ func CreateCombinationGenerationCounter(NumberOfInputs int16) (*CombinationGener
 	}, nil
 }
 
-func IncrementCombinationGenerationCounter(combination *CombinationGenerationCounterEntity.CombinationGenerationCounter) (*CombinationGenerationCounterEntity.CombinationGenerationCounter, error) {
+func IncrementCombinationGenerationCounter(NumberOfInputs int16) (*CombinationGenerationCounterEntity.CombinationGenerationCounter, error) {
 	collectionName := "TotalCombinationGenerationAccordingNumberOfInputs"
 	col, err := CommonRepository.Connect(collectionName)
 	if err != nil {
@@ -60,17 +60,21 @@ func IncrementCombinationGenerationCounter(combination *CombinationGenerationCou
 	}
 	defer CommonRepository.Disconnect(col)
 
-	ctx := context.TODO()
-	newCountOfCombination := combination.Count + 1
-	filter := bson.D{{Key: "NumberOfInputs", Value: combination.NumberOfInputs}}
-	combination.Count = newCountOfCombination
-	update := bson.M{"$set": bson.M{"Count": newCountOfCombination}}
-	_, err = col.UpdateOne(ctx, filter, update)
+	combinationCounter, err := FindByNumberOfInputs(NumberOfInputs)
 	if err != nil {
-		return nil, errors.New("Error to increment the Combination Generation Counter with " + strconv.Itoa(int(combination.NumberOfInputs)) + " inputs")
+		return nil, errors.New(err.Error())
 	}
 
-	return combination, nil
+	ctx := context.TODO()
+	filter := bson.D{{Key: "NumberOfInputs", Value: combinationCounter.NumberOfInputs}}
+	combinationCounter.Count = combinationCounter.Count + 1
+	update := bson.M{"$set": bson.M{"Count": combinationCounter.Count}}
+	_, err = col.UpdateOne(ctx, filter, update)
+	if err != nil {
+		return nil, errors.New("Error to increment the Combination Generation Counter with " + strconv.Itoa(int(combinationCounter.NumberOfInputs)) + " inputs")
+	}
+
+	return combinationCounter, nil
 }
 
 func ListAllCombinationsCounters() (*[]CombinationGenerationCounterEntity.CombinationGenerationCounter, error) {
