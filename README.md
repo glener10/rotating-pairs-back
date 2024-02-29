@@ -7,7 +7,10 @@
 ![Build Status](https://github.com/glener10/rotating-pairs-back/workflows/go/badge.svg)
 [![License](https://img.shields.io/github/license/glener10/rotating-pairs-back)](/LICENSE)
 
-<p align="center"> 🚀 Back-End of Rotating Pairs Web Application. Responsible for returning the positions of combinations used in the application and saving monitoring logs. </p>
+<p align="center"> 🚀 Back-End of Rotating Pairs Web Application. Responsible for saving monitoring logs and
+Returning the positions of combinations used in the application (Limited beetwen 2 and 20), like this. 👇🏽 </p>
+
+![Return Example](/documentation/readmeImages/return.png)
 
 🏁 Table of Contents
 
