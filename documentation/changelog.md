@@ -1,7 +1,7 @@
 # [vX.X.X] - XX/XX/XXXX
 
-- Implementing IncrementCombinationGenerationCounter useCase
-- Create CI/CD GitHub Actions procedure
 - Config setup tests
-- Integration tests with CombinationGenerationCounter and MongoDb
-- E2E tests
+- Implementation of IncrementCombinationGenerationCounter useCase and integration and E2E tests
+- Create CI/CD GitHub Actions procedure
+- Implementation of ListAllCombinationsCounters useCase and integration and E2E tests
+- CORS configuration
