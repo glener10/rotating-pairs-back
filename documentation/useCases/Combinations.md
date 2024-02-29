@@ -1,7 +1,7 @@
 SCENARIO: Get Combinations according number of entries
 GIVEN A request was sent containing the number of entries
 WHEN User clicks on the "Generate Random Combinations" button in the Front-End
-THEN It will return the combinations according the specified number of entries
+THEN It will return the combinations according the specified number of entries and exec 'IncrementCombinationGeneration' useCase
 
 SCENARIO: Dont Return Combinations
 GIVEN A request was sent without the number of entries
