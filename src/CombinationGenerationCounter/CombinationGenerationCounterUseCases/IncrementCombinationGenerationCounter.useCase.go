@@ -1,4 +1,4 @@
-package IncrementCombinationGenerationCounterUseCase
+package CombinationGenerationCounterUseCases
 
 import (
 	"net/http"

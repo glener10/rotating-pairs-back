@@ -8,6 +8,7 @@ import (
 	CombinationGenerationCounterEntity "github.com/glener10/rotating-pairs-back/src/CombinationGenerationCounter/entities"
 	CommonRepository "github.com/glener10/rotating-pairs-back/src/common/repositories"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 func FindByNumberOfEntries(numberOfEntries int16) (*CombinationGenerationCounterEntity.CombinationGenerationCounter, error) {
@@ -71,4 +72,34 @@ func IncrementCombinationGenerationCounter(combination *CombinationGenerationCou
 	}
 
 	return combination, nil
+}
+
+func ListAllCombinationsCounters() (*[]CombinationGenerationCounterEntity.CombinationGenerationCounter, error) {
+	collectionName := "TotalCombinationGenerationAccordingNumberOfEntries"
+	col, err := CommonRepository.Connect(collectionName)
+	if err != nil {
+		return nil, errors.New(err.Error())
+	}
+	defer CommonRepository.Disconnect(col)
+
+	ctx := context.TODO()
+	findOptions := options.Find()
+	findOptions.SetSort(bson.D{{Key: "Count", Value: -1}})
+
+	cursor, err := col.Find(ctx, bson.D{}, findOptions)
+	if err != nil {
+		return nil, errors.New("failed to execute find operation: " + err.Error())
+	}
+	defer cursor.Close(ctx)
+
+	var results []CombinationGenerationCounterEntity.CombinationGenerationCounter
+	for cursor.Next(ctx) {
+		var result CombinationGenerationCounterEntity.CombinationGenerationCounter
+		if err := cursor.Decode(&result); err != nil {
+			return nil, errors.New("Failed to decode document: " + err.Error())
+		}
+		results = append(results, result)
+	}
+
+	return &results, nil
 }

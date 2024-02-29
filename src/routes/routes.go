@@ -11,6 +11,7 @@ import (
 func HandlerRoutes() {
 	r := gin.Default()
 	r.POST("/combinationGenerationCounter", CombinationGenerationCounterController.IncrementCombinationGenerationCounter)
+	r.GET("/combinationGenerationCounter", CombinationGenerationCounterController.ListAllCombinationsCounters)
 
 	err := r.Run()
 	if err != nil {
