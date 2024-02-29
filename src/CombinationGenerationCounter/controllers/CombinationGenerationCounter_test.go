@@ -11,6 +11,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	CombinationGenerationCounterEntity "github.com/glener10/rotating-pairs-back/src/CombinationGenerationCounter/entities"
+	CombinationGenerationCounterRepo "github.com/glener10/rotating-pairs-back/src/CombinationGenerationCounter/repositories"
 	CombinationGenerationCounterUtils "github.com/glener10/rotating-pairs-back/src/CombinationGenerationCounter/utils"
 	Utils "github.com/glener10/rotating-pairs-back/src/common/utils"
 	"github.com/stretchr/testify/assert"
@@ -44,7 +45,7 @@ func SetupRoutes() *gin.Engine {
 	return routes
 }
 
-func TestRouteWithoutBody(t *testing.T) {
+func TestIncrementRouteWithoutBody(t *testing.T) {
 	r := SetupRoutes()
 	r.POST("/combinationGenerationCounter", IncrementCombinationGenerationCounter)
 	req, _ := http.NewRequest("POST", "/combinationGenerationCounter", nil)
@@ -65,7 +66,7 @@ func TestRouteWithoutBody(t *testing.T) {
 	assert.Equal(t, expected, actual, "Should return 'Invalid request body' and 422 if the requisition doenst have a body")
 }
 
-func TestRouteWitNumberOfInputsMoreThanTwenty(t *testing.T) {
+func TestIncrementRouteWitNumberOfInputsMoreThanTwenty(t *testing.T) {
 	r := SetupRoutes()
 	r.POST("/combinationGenerationCounter", IncrementCombinationGenerationCounter)
 
@@ -91,7 +92,7 @@ func TestRouteWitNumberOfInputsMoreThanTwenty(t *testing.T) {
 	assert.Equal(t, expected, actual, "Should return 'NumberOfEntries is more than 20 or less than 1' and 422 if the NumberOfInputs in body is more than 20")
 }
 
-func TestRouteWitNumberOfInputsLessThanZero(t *testing.T) {
+func TestIncrementRouteWitNumberOfInputsLessThanZero(t *testing.T) {
 	r := SetupRoutes()
 	r.POST("/combinationGenerationCounter", IncrementCombinationGenerationCounter)
 
@@ -117,7 +118,7 @@ func TestRouteWitNumberOfInputsLessThanZero(t *testing.T) {
 	assert.Equal(t, expected, actual, "Should return 'NumberOfEntries is more than 20 or less than 1' and 422 if the NumberOfInputs in body is less tha 0")
 }
 
-func TestRouteSuccessCase(t *testing.T) {
+func TestIncrementRouteSuccessCase(t *testing.T) {
 	r := SetupRoutes()
 	r.POST("/combinationGenerationCounter", IncrementCombinationGenerationCounter)
 
@@ -142,4 +143,42 @@ func TestRouteSuccessCase(t *testing.T) {
 	}
 
 	assert.Equal(t, expected, actual, "Should return expected object in the success case")
+}
+
+func TestListAllCombinationsCountersRouteSuccessCase(t *testing.T) {
+	if err := CombinationGenerationCounterUtils.CleanCollection(); err != nil {
+		log.Fatalf("Error to exec cleaning collection after repository tests execution: %s", err.Error())
+	}
+
+	_, _ = CombinationGenerationCounterRepo.CreateCombinationGenerationCounter(1)
+	combinationTwo, _ := CombinationGenerationCounterRepo.CreateCombinationGenerationCounter(2)
+	_, _ = CombinationGenerationCounterRepo.IncrementCombinationGenerationCounter(combinationTwo)
+	_, _ = CombinationGenerationCounterRepo.IncrementCombinationGenerationCounter(combinationTwo)
+
+	r := SetupRoutes()
+	r.GET("/combinationGenerationCounter", ListAllCombinationsCounters)
+	req, _ := http.NewRequest("GET", "/combinationGenerationCounter", nil)
+	response := httptest.NewRecorder()
+	r.ServeHTTP(response, req)
+
+	three := int32(3)
+	firstExpectededObject := CombinationGenerationCounterEntity.CombinationGenerationCounter{
+		NumberOfEntries: 2,
+		Count:           &three,
+	}
+	one := int32(1)
+	secondExpectededObject := CombinationGenerationCounterEntity.CombinationGenerationCounter{
+		NumberOfEntries: 1,
+		Count:           &one,
+	}
+
+	var actual []CombinationGenerationCounterEntity.CombinationGenerationCounter
+	err := json.NewDecoder(response.Body).Decode(&actual)
+	if err != nil {
+		t.Errorf("failed to decode response body: %v", err)
+	}
+
+	assert.Equal(t, len(actual), 2, "Slice length should be equal")
+	assert.Equal(t, (actual)[0], firstExpectededObject, "Element should be equal")
+	assert.Equal(t, (actual)[1], secondExpectededObject, "Element should be equal")
 }
