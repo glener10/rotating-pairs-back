@@ -68,3 +68,31 @@ func TestIncrementCombinationGenerationCounter(t *testing.T) {
 
 	assert.Equal(t, result, expectedObject, "The count of combination generation with '1' NumberOfInputs should be incremented to 2")
 }
+
+func TestListAllCombinationsCounters(t *testing.T) {
+	if err := CombinationGenerationCounterUtils.CleanCollection(); err != nil {
+		log.Fatalf("Error to exec cleaning collection after repository tests execution: %s", err.Error())
+	}
+	_, _ = CreateCombinationGenerationCounter(1)
+	combinationTwo, _ := CreateCombinationGenerationCounter(2)
+	_, _ = IncrementCombinationGenerationCounter(combinationTwo)
+	_, _ = IncrementCombinationGenerationCounter(combinationTwo)
+	three := int32(3)
+	firstExpectededObject := CombinationGenerationCounterEntity.CombinationGenerationCounter{
+		NumberOfEntries: 2,
+		Count:           &three,
+	}
+	one := int32(1)
+	secondExpectededObject := CombinationGenerationCounterEntity.CombinationGenerationCounter{
+		NumberOfEntries: 1,
+		Count:           &one,
+	}
+	expectedResult := []CombinationGenerationCounterEntity.CombinationGenerationCounter{firstExpectededObject, secondExpectededObject}
+
+	result, _ := ListAllCombinationsCounters()
+
+	assert.Equal(t, len(*result), len(expectedResult), "Slice length should be equal")
+	for i := range expectedResult {
+		assert.Equal(t, (*result)[i], expectedResult[i], "Element should be equal")
+	}
+}
