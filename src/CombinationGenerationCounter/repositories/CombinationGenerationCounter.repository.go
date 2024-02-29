@@ -37,11 +37,10 @@ func CreateCombinationGenerationCounter(NumberOfInputs int16) (*CombinationGener
 	}
 	defer CommonRepository.Disconnect(col)
 
-	one := int32(1)
 	ctx := context.TODO()
 	document := bson.M{
 		"NumberOfInputs": NumberOfInputs,
-		"Count":          one,
+		"Count":          1,
 	}
 	_, err = col.InsertOne(ctx, document)
 	if err != nil {
@@ -49,7 +48,7 @@ func CreateCombinationGenerationCounter(NumberOfInputs int16) (*CombinationGener
 	}
 	return &CombinationGenerationCounterEntity.CombinationGenerationCounter{
 		NumberOfInputs: NumberOfInputs,
-		Count:          &one,
+		Count:          1,
 	}, nil
 }
 
@@ -62,9 +61,9 @@ func IncrementCombinationGenerationCounter(combination *CombinationGenerationCou
 	defer CommonRepository.Disconnect(col)
 
 	ctx := context.TODO()
-	newCountOfCombination := *combination.Count + 1
+	newCountOfCombination := combination.Count + 1
 	filter := bson.D{{Key: "NumberOfInputs", Value: combination.NumberOfInputs}}
-	combination.Count = &newCountOfCombination
+	combination.Count = newCountOfCombination
 	update := bson.M{"$set": bson.M{"Count": newCountOfCombination}}
 	_, err = col.UpdateOne(ctx, filter, update)
 	if err != nil {

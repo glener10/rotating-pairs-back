@@ -4,12 +4,12 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	CombinationGenerationCounterEntity "github.com/glener10/rotating-pairs-back/src/CombinationGenerationCounter/entities"
 	CombinationGenerationCounterRepo "github.com/glener10/rotating-pairs-back/src/CombinationGenerationCounter/repositories"
+	CombinationRequestDto "github.com/glener10/rotating-pairs-back/src/common/interfaces"
 )
 
-func IncrementCombinationGenerationCounter(c *gin.Context, bodyRequisition CombinationGenerationCounterEntity.CombinationGenerationCounter) {
-	NumberOfInputs := bodyRequisition.NumberOfInputs
+func IncrementCombinationGenerationCounter(c *gin.Context, combinationRequest CombinationRequestDto.CombinationRequest) {
+	NumberOfInputs := combinationRequest.NumberOfInputs
 	results, err := CombinationGenerationCounterRepo.FindByNumberOfInputs(NumberOfInputs)
 	if err != nil {
 		results, err = CombinationGenerationCounterRepo.CreateCombinationGenerationCounter(NumberOfInputs)

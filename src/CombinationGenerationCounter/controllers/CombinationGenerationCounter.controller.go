@@ -4,24 +4,24 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	CombinationGenerationCounterEntity "github.com/glener10/rotating-pairs-back/src/CombinationGenerationCounter/entities"
 	CombinationGenerationCounterUseCases "github.com/glener10/rotating-pairs-back/src/CombinationGenerationCounter/useCases"
+	CombinationRequestDto "github.com/glener10/rotating-pairs-back/src/common/interfaces"
 )
 
 func IncrementCombinationGenerationCounter(c *gin.Context) {
-	var combination CombinationGenerationCounterEntity.CombinationGenerationCounter
-	if err := c.ShouldBindJSON(&combination); err != nil {
+	var combinationRequest CombinationRequestDto.CombinationRequest
+	if err := c.ShouldBindJSON(&combinationRequest); err != nil {
 		statusCode := http.StatusUnprocessableEntity
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request body", "statusCode": statusCode})
 		return
 	}
-	if err := CombinationGenerationCounterEntity.Validate(&combination); err != nil {
+	if err := CombinationRequestDto.Validate(&combinationRequest); err != nil {
 		statusCode := http.StatusUnprocessableEntity
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error(), "statusCode": statusCode})
 		return
 	}
 
-	CombinationGenerationCounterUseCases.IncrementCombinationGenerationCounter(c, combination)
+	CombinationGenerationCounterUseCases.IncrementCombinationGenerationCounter(c, combinationRequest)
 }
 
 func ListAllCombinationsCounters(c *gin.Context) {

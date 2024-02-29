@@ -28,10 +28,9 @@ func TestMain(m *testing.M) {
 func TestCreateCombinationGenerationCounter(t *testing.T) {
 	result, _ := CreateCombinationGenerationCounter(3)
 
-	one := int32(1)
 	expectedObject := &CombinationGenerationCounterEntity.CombinationGenerationCounter{
 		NumberOfInputs: 3,
-		Count:          &one,
+		Count:          1,
 	}
 
 	assert.Equal(t, result, expectedObject, "The create object need to be equal to expected object")
@@ -40,10 +39,9 @@ func TestCreateCombinationGenerationCounter(t *testing.T) {
 func TestFindByNumberOfInputs(t *testing.T) {
 	result, _ := FindByNumberOfInputs(2)
 
-	one := int32(1)
 	expectedObject := &CombinationGenerationCounterEntity.CombinationGenerationCounter{
 		NumberOfInputs: 2,
-		Count:          &one,
+		Count:          1,
 	}
 
 	assert.Equal(t, result, expectedObject, "The object finded in MongoDB needs to be the expected object")
@@ -60,10 +58,9 @@ func TestIncrementCombinationGenerationCounter(t *testing.T) {
 	_, _ = IncrementCombinationGenerationCounter(result)
 	result, _ = FindByNumberOfInputs(1)
 
-	two := int32(2)
 	expectedObject := &CombinationGenerationCounterEntity.CombinationGenerationCounter{
 		NumberOfInputs: 1,
-		Count:          &two,
+		Count:          2,
 	}
 
 	assert.Equal(t, result, expectedObject, "The count of combination generation with '1' NumberOfInputs should be incremented to 2")
@@ -77,15 +74,13 @@ func TestListAllCombinationsCounters(t *testing.T) {
 	combinationTwo, _ := CreateCombinationGenerationCounter(2)
 	_, _ = IncrementCombinationGenerationCounter(combinationTwo)
 	_, _ = IncrementCombinationGenerationCounter(combinationTwo)
-	three := int32(3)
 	firstExpectededObject := CombinationGenerationCounterEntity.CombinationGenerationCounter{
 		NumberOfInputs: 2,
-		Count:          &three,
+		Count:          3,
 	}
-	one := int32(1)
 	secondExpectededObject := CombinationGenerationCounterEntity.CombinationGenerationCounter{
 		NumberOfInputs: 1,
-		Count:          &one,
+		Count:          1,
 	}
 
 	result, _ := ListAllCombinationsCounters()

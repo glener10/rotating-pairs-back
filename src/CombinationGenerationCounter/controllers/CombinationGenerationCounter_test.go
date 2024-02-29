@@ -130,9 +130,8 @@ func TestIncrementRouteSuccessCase(t *testing.T) {
 	response := httptest.NewRecorder()
 	r.ServeHTTP(response, req)
 
-	two := int32(2)
 	expected := CombinationGenerationCounterEntity.CombinationGenerationCounter{
-		Count:          &two,
+		Count:          2,
 		NumberOfInputs: 2,
 	}
 
@@ -161,15 +160,13 @@ func TestListAllCombinationsCountersRouteSuccessCase(t *testing.T) {
 	response := httptest.NewRecorder()
 	r.ServeHTTP(response, req)
 
-	three := int32(3)
 	firstExpectededObject := CombinationGenerationCounterEntity.CombinationGenerationCounter{
 		NumberOfInputs: 2,
-		Count:          &three,
+		Count:          3,
 	}
-	one := int32(1)
 	secondExpectededObject := CombinationGenerationCounterEntity.CombinationGenerationCounter{
 		NumberOfInputs: 1,
-		Count:          &one,
+		Count:          1,
 	}
 
 	var actual []CombinationGenerationCounterEntity.CombinationGenerationCounter
