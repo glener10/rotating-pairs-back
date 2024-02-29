@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 
+	CombinationGenerationCounterUtils "github.com/glener10/rotating-pairs-back/src/CombinationGenerationCounter/utils"
 	CommonRepository "github.com/glener10/rotating-pairs-back/src/common/repositories"
 	"go.mongodb.org/mongo-driver/bson"
 )
@@ -27,6 +28,10 @@ func CleanCollection() error {
 	_, err = col.DeleteMany(context.Background(), bson.M{})
 	if err != nil {
 		return errors.New("Error to DeleteMany in 'Combinations' collection:" + err.Error())
+	}
+	err = CombinationGenerationCounterUtils.Truncate()
+	if err != nil {
+		return errors.New("Error to DeleteMany in 'TotalCombinationGenerationAccordingNumberOfInputs' collection:" + err.Error())
 	}
 	return nil
 }

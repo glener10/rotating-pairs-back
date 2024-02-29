@@ -13,6 +13,7 @@ import (
 	CombinationGenerationCounterEntity "github.com/glener10/rotating-pairs-back/src/CombinationGenerationCounter/entities"
 	CombinationGenerationCounterRepo "github.com/glener10/rotating-pairs-back/src/CombinationGenerationCounter/repositories"
 	CombinationGenerationCounterUtils "github.com/glener10/rotating-pairs-back/src/CombinationGenerationCounter/utils"
+	CombinationRequestDto "github.com/glener10/rotating-pairs-back/src/common/interfaces"
 	Utils "github.com/glener10/rotating-pairs-back/src/common/utils"
 	"github.com/stretchr/testify/assert"
 )
@@ -22,20 +23,16 @@ type ErrorResponse struct {
 	StatusCode int    `json:"statusCode"`
 }
 
-type BodyRequest struct {
-	NumberOfInputs int16 `json:"NumberOfInputs"`
-}
-
 func TestMain(m *testing.M) {
 	if err := Utils.LoadEnvironmentVariables("../../../.env"); err != nil {
 		log.Fatalf("Error to load environment variables: %s", err.Error())
 	}
 	if err := CombinationGenerationCounterUtils.Truncate(); err != nil {
-		log.Fatalf("Error to exec truncate method before repository tests execution: %s", err.Error())
+		log.Fatalf("Error to exec truncate method before Controler Combination Counter tests execution: %s", err.Error())
 	}
 	exitCode := m.Run()
 	if err := CombinationGenerationCounterUtils.CleanCollection(); err != nil {
-		log.Fatalf("Error to exec cleaning collection after repository tests execution: %s", err.Error())
+		log.Fatalf("Error to exec cleaning collection after Controler Combination Counter tests execution: %s", err.Error())
 	}
 	os.Exit(exitCode)
 }
@@ -70,7 +67,7 @@ func TestIncrementRouteWitNumberOfInputsMoreThanTwenty(t *testing.T) {
 	r := SetupRoutes()
 	r.POST("/combinationGenerationCounter", IncrementCombinationGenerationCounter)
 
-	body := BodyRequest{
+	body := CombinationRequestDto.CombinationRequest{
 		NumberOfInputs: 25,
 	}
 	bodyConverted, _ := json.Marshal(body)
@@ -96,7 +93,7 @@ func TestIncrementRouteWitNumberOfInputsLessThanZero(t *testing.T) {
 	r := SetupRoutes()
 	r.POST("/combinationGenerationCounter", IncrementCombinationGenerationCounter)
 
-	body := BodyRequest{
+	body := CombinationRequestDto.CombinationRequest{
 		NumberOfInputs: -1,
 	}
 	bodyConverted, _ := json.Marshal(body)
@@ -122,7 +119,7 @@ func TestIncrementRouteSuccessCase(t *testing.T) {
 	r := SetupRoutes()
 	r.POST("/combinationGenerationCounter", IncrementCombinationGenerationCounter)
 
-	body := BodyRequest{
+	body := CombinationRequestDto.CombinationRequest{
 		NumberOfInputs: 2,
 	}
 	bodyConverted, _ := json.Marshal(body)

@@ -25,7 +25,7 @@ func TestMain(m *testing.M) {
 	os.Exit(exitCode)
 }
 
-func TestCombination(t *testing.T) {
+func TestFindCombination(t *testing.T) {
 	expectedObject := &CombinationEntity.Combination{
 		NumberOfInputs:                2,
 		NumberOfSprints:               1,
@@ -46,16 +46,3 @@ func TestCombination(t *testing.T) {
 
 	assert.Equal(t, result, expectedObject, "Should return the expected object")
 }
-
-/* func TestCombination(t *testing.T) {
-	_, _ = CombinationGenerationCounterRepo.CreateCombinationGenerationCounter(2)
-	expectedCombinationCounter := &CombinationGenerationCounterEntity.CombinationGenerationCounter{
-		NumberOfInputs: 2,
-		Count:          2,
-	}
-
-	result, err :=
-	combinationCounterAfterUseCase, _ := CombinationGenerationCounterRepo.FindByNumberOfInputs(2)
-
-	assert.Equal(t, combinationCounterAfterUseCase, expectedCombinationCounter, "Should increment the Combination Counter after useCase executation")
-} */
