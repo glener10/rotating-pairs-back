@@ -3,7 +3,7 @@ POST http://localhost:8080/combinationGenerationCounter
 content-type: application/json
 
 {
-  "NumberOfEntries": 3
+  "NumberOfInputs": 5
 }
 
 ###CombinationGenerationCounter, Get all Combination Generation Counter order by Count
