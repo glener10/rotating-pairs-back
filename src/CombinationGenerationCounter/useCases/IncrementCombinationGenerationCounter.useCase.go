@@ -10,9 +10,9 @@ import (
 
 func IncrementCombinationGenerationCounter(c *gin.Context, combinationRequest CombinationRequestDto.CombinationRequest) {
 	NumberOfInputs := combinationRequest.NumberOfInputs
-	results, err := CombinationGenerationCounterRepo.FindByNumberOfInputs(NumberOfInputs)
+	_, err := CombinationGenerationCounterRepo.FindByNumberOfInputs(NumberOfInputs)
 	if err != nil {
-		results, err = CombinationGenerationCounterRepo.CreateCombinationGenerationCounter(NumberOfInputs)
+		results, err := CombinationGenerationCounterRepo.CreateCombinationGenerationCounter(NumberOfInputs)
 		if err != nil {
 			statusCode := http.StatusUnprocessableEntity
 			errorMessage := err.Error()
@@ -22,7 +22,7 @@ func IncrementCombinationGenerationCounter(c *gin.Context, combinationRequest Co
 		c.JSON(http.StatusOK, results)
 		return
 	}
-	results, err = CombinationGenerationCounterRepo.IncrementCombinationGenerationCounter(NumberOfInputs)
+	results, err := CombinationGenerationCounterRepo.IncrementCombinationGenerationCounter(NumberOfInputs)
 	if err != nil {
 		statusCode := http.StatusUnprocessableEntity
 		errorMessage := err.Error()

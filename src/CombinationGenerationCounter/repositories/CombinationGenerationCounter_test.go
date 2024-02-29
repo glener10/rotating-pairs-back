@@ -54,9 +54,9 @@ func TestFindByNumberOfInputsInCaseDoentsFindTheCombination(t *testing.T) {
 }
 
 func TestIncrementCombinationGenerationCounter(t *testing.T) {
-	result, _ := FindByNumberOfInputs(1)
+	_, _ = FindByNumberOfInputs(1)
 	_, _ = IncrementCombinationGenerationCounter(1)
-	result, _ = FindByNumberOfInputs(1)
+	result, _ := FindByNumberOfInputs(1)
 
 	expectedObject := &CombinationGenerationCounterEntity.CombinationGenerationCounter{
 		NumberOfInputs: 1,
