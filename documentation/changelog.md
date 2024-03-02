@@ -1,4 +1,4 @@
-# [vX.X.X] - XX/XX/XXXX
+# [v1.0.0] - 02/03/2024 (dd/mm/YYYY)
 
 - Config setup tests
 - Implementation of 'IncrementCombinationGenerationCounter' useCase and integration and E2E tests
