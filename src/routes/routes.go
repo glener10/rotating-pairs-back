@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -22,14 +23,20 @@ func GetAllowedURLs() []string {
 
 func HandlerRoutes() {
 	r := gin.Default()
-	config := cors.DefaultConfig()
-	config.AllowOrigins = GetAllowedURLs()
-	if config.AllowOrigins == nil {
+	allowedUrls := GetAllowedURLs()
+	if allowedUrls == nil {
 		fmt.Println("Error to read allowed urls in the Route Handler")
 		os.Exit(-1)
 	}
-	config.AllowHeaders = []string{"Origin", "Content-Length", "Content-Type", "Authorization"}
-	r.Use(cors.New(config))
+
+	r.Use(cors.New(cors.Config{
+		AllowOrigins:     allowedUrls,
+		AllowMethods:     []string{"POST", "GET"},
+		AllowHeaders:     []string{"Origin"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+		MaxAge:           12 * time.Hour,
+	}))
 
 	r.POST("/combinationGenerationCounter", CombinationGenerationCounterController.IncrementCombinationGenerationCounter)
 	r.GET("/combinationGenerationCounter", CombinationGenerationCounterController.ListAllCombinationsCounters)
