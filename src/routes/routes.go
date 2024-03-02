@@ -23,6 +23,11 @@ func GetAllowedURLs() []string {
 
 func HandlerRoutes() {
 	r := gin.Default()
+
+	r.GET("/", func(c *gin.Context) {
+		c.String(200, "Hello, World!")
+	})
+
 	allowedUrls := GetAllowedURLs()
 	if allowedUrls == nil {
 		fmt.Println("Error to read allowed urls in the Route Handler")
@@ -37,16 +42,14 @@ func HandlerRoutes() {
 		AllowCredentials: true,
 		MaxAge:           12 * time.Hour,
 	}))
+
+	r.POST("/combinationGenerationCounter", CombinationGenerationCounterController.IncrementCombinationGenerationCounter)
+	r.GET("/combinationGenerationCounter", CombinationGenerationCounterController.ListAllCombinationsCounters)
+	r.POST("/combination", CombinationController.Combination)
+
 	err := r.Run()
 	if err != nil {
 		fmt.Println("Error to up routes")
 		os.Exit(-1)
 	}
-
-	r.POST("/combinationGenerationCounter", CombinationGenerationCounterController.IncrementCombinationGenerationCounter)
-	r.GET("/combinationGenerationCounter", CombinationGenerationCounterController.ListAllCombinationsCounters)
-	r.POST("/combination", CombinationController.Combination)
-	r.GET("/", func(c *gin.Context) {
-		c.String(200, "Hello, World!")
-	})
 }

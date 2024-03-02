@@ -36,9 +36,10 @@ Returning the positions of combinations used in the application (Limited beetwen
 
 ===================
 
-You can access the production Front-End application via the link [Rotating Pair](https://rotatingpairs.online)
+The production application is in [rotating-pairs-back-production](https://rotating-pairs-back-production.up.railway.app/), the only route that is available to any origin is '/', where you will see a Hello World! The other routes are private to the Front-End application, you can [exec locally](#using) the back-end with some limited values.
 
-The Back-End production version is open only to Front-End application, you can [exec locally](#using). The front-end source code is in the [link](https://github.com/glener10/rotating-pairs-front)
+You can access the production Front-End application via the link [Rotating Pair](https://rotatingpairs.online)
+The front-end source code is in [hear](https://github.com/glener10/rotating-pairs-front).
 
 <div id="dependenciesandenvironment"></div>
 
@@ -110,7 +111,7 @@ To learn more about technologies used in the application:
 
 - [Go](https://golang.org/) - learn about Go features and API.
 
-- [Versel](https://vercel.com/) - learn about Versel features and API.
+- [Railway](https://railway.app/) - learn about Railway features and API.
 
 - [Docker](https://www.docker.com/) - learn about Docker features and API.
 
