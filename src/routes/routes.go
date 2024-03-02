@@ -4,20 +4,13 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	CombinationGenerationCounterController "github.com/glener10/rotating-pairs-back/src/CombinationGenerationCounter/controllers"
 	CombinationController "github.com/glener10/rotating-pairs-back/src/Combinations/controllers"
 )
-
-func GetAllowedURLs() []string {
-	allowedURLsString := os.Getenv("ALLOW_URLS")
-	if allowedURLsString == "" {
-		return nil
-	}
-	allowedURLs := strings.Split(allowedURLsString, "|")
-	return allowedURLs
-}
 
 func HandlerRoutes() {
 	r := gin.Default()
@@ -26,7 +19,22 @@ func HandlerRoutes() {
 		c.String(200, "Hello, World!")
 	})
 
-	r.Use(corsMiddleware())
+	allowedUrls := GetAllowedURLs()
+	if allowedUrls == nil {
+		fmt.Println("Error to read allowed urls in the Route Handler")
+		os.Exit(-1)
+	}
+
+	config := cors.DefaultConfig()
+	config.AllowAllOrigins = false
+	config.AllowOrigins = []string{"https://rotatingpairs.online/"}
+	config.AllowMethods = []string{"POST"}
+	config.AllowHeaders = []string{"Origin", "Content-Type", "Authorization", "Accept", "User-Agent", "Cache-Control", "Pragma"}
+	config.ExposeHeaders = []string{"Content-Length"}
+	config.AllowCredentials = true
+	config.MaxAge = 12 * time.Hour
+
+	r.Use(cors.New(config))
 
 	r.POST("/combinationGenerationCounter", CombinationGenerationCounterController.IncrementCombinationGenerationCounter)
 	r.GET("/combinationGenerationCounter", CombinationGenerationCounterController.ListAllCombinationsCounters)
@@ -39,23 +47,11 @@ func HandlerRoutes() {
 	}
 }
 
-func corsMiddleware() gin.HandlerFunc {
-	allowedUrls := GetAllowedURLs()
-	if allowedUrls == nil {
-		fmt.Println("Error to read allowed urls in the Route Handler")
-		os.Exit(-1)
+func GetAllowedURLs() []string {
+	allowedURLsString := os.Getenv("ALLOW_URLS")
+	if allowedURLsString == "" {
+		return nil
 	}
-
-	return func(c *gin.Context) {
-		c.Writer.Header().Set("Access-Control-Allow-Origin", "https://rotatingpairs.online/")
-		c.Writer.Header().Set("Access-Control-Allow-Methods", "GET")
-		c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
-
-		if c.Request.Method == "OPTIONS" {
-			c.AbortWithStatus(204)
-			return
-		}
-
-		c.Next()
-	}
+	allowedURLs := strings.Split(allowedURLsString, "|")
+	return allowedURLs
 }
