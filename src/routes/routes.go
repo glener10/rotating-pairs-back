@@ -34,6 +34,9 @@ func HandlerRoutes() {
 	r.POST("/combinationGenerationCounter", CombinationGenerationCounterController.IncrementCombinationGenerationCounter)
 	r.GET("/combinationGenerationCounter", CombinationGenerationCounterController.ListAllCombinationsCounters)
 	r.POST("/combination", CombinationController.Combination)
+	r.GET("/", func(c *gin.Context) {
+		c.String(200, "Hello, World!")
+	})
 
 	err := r.Run()
 	if err != nil {
