@@ -38,7 +38,7 @@ func HandlerRoutes() {
 		c.String(200, "Hello, World!")
 	})
 
-	err := r.Run()
+	err := r.Run("3000")
 	if err != nil {
 		fmt.Println("Error to up routes")
 		os.Exit(-1)
