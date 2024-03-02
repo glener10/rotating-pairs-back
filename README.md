@@ -58,14 +58,17 @@ If you will exec in local environment, you will need the docker and docker-compo
 
 ## 🚀 **Installing**
 
-You will need a MongoDB instance:
+You will need a MongoDB instance, we have a ready image and docker-compose configuration in _data_ folder, you can exec duying this:
 
 ```bash
+#Go to 'data' folder
+cd data
+
 # container with MongoDB instance
 $ docker-compose up -d
 ```
 
-This execution uploads a MongoDB container with some initialized limited values, you can see them in [init-mongo.js](./init-mongo.js)
+This execution uploads a MongoDB container with some initialized limited values, you can see them in [init-mongo.js](./data/init-mongo.js)
 
 You will need to a _.env_ file in root folder
 
@@ -93,16 +96,10 @@ go test -p 1 ./src/...
 
 First, check the [dependencies](#dependenciesandenvironment) and the [installation](#installing) process:
 
-To exec you will need enter in 'src' folder:
-
-```bash
-cd src
-```
-
-And exec the _main.go_ script:
+Going to root folder and exec:
 
 ```
-go run main.go
+go run .\main.go
 ```
 
 Now you can open [http://localhost:8080](http://localhost:8080) with your browser to see the result.
