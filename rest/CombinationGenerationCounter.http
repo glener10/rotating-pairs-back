@@ -1,7 +1,10 @@
-###CombinationGenerationCounter
+###CombinationGenerationCounter, Increment a Combination Generation Counter
 POST http://localhost:8080/combinationGenerationCounter
 content-type: application/json
 
 {
-  "NumberOfEntries": 1
+  "NumberOfInputs": 2
 }
+
+###CombinationGenerationCounter, Get all Combination Generation Counter order by Count
+GET http://localhost:8080/combinationGenerationCounter

@@ -1,14 +1,14 @@
-package CombinationGenerationCounterController
+package CombinationController
 
 import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	CombinationGenerationCounterUseCases "github.com/glener10/rotating-pairs-back/src/CombinationGenerationCounter/useCases"
+	CombinationUseCases "github.com/glener10/rotating-pairs-back/src/Combinations/useCases"
 	CombinationRequestDto "github.com/glener10/rotating-pairs-back/src/common/interfaces"
 )
 
-func IncrementCombinationGenerationCounter(c *gin.Context) {
+func Combination(c *gin.Context) {
 	var combinationRequest CombinationRequestDto.CombinationRequest
 	if err := c.ShouldBindJSON(&combinationRequest); err != nil {
 		statusCode := http.StatusUnprocessableEntity
@@ -21,9 +21,5 @@ func IncrementCombinationGenerationCounter(c *gin.Context) {
 		return
 	}
 
-	CombinationGenerationCounterUseCases.IncrementCombinationGenerationCounter(c, combinationRequest)
-}
-
-func ListAllCombinationsCounters(c *gin.Context) {
-	CombinationGenerationCounterUseCases.ListAllCombinationsCounters(c)
+	CombinationUseCases.Combination(c, combinationRequest)
 }

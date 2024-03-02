@@ -1,3 +1,8 @@
-# [vX.X.X] - XX/XX/XXXX
+# [v1.0.0] - 02/03/2024 (dd/mm/YYYY)
 
-- Implementing IncrementTotalCombinationGenerationAccordingNumberOfEntries useCase
+- Config setup tests
+- Implementation of 'IncrementCombinationGenerationCounter' useCase and integration and E2E tests
+- Create CI/CD GitHub Actions procedure
+- Implementation of 'ListAllCombinationsCounters' useCase and integration and E2E tests
+- Implementation of 'Combination' useCase and integration and E2E tests
+- CORS configuration
