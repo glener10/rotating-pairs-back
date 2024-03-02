@@ -29,9 +29,7 @@ jobs:
         uses: actions/setup-go@v5.0.0
 
       - name: Run Go Build
-        run: |
-          cd src
-          go build
+        run: go build
 
   test:
     name: Test
