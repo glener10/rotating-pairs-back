@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	if err := Utils.LoadEnvironmentVariables("../.env"); err != nil {
+	if err := Utils.LoadEnvironmentVariables(".env"); err != nil {
 		fmt.Println("Error to load environment variables: ", err)
 		return
 	}
