@@ -1,3 +1,7 @@
+# [v1.0.2] - 02/03/2024 (dd/mm/YYYY)
+
+- Configuring CORS policy
+
 # [v1.0.1] - 02/03/2024 (dd/mm/YYYY)
 
 - Changing location of the _Dockerfile_ and _docker-compose_ MongoDB files, because the conflicting in _RailWay_ application
