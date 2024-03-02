@@ -37,6 +37,11 @@ func HandlerRoutes() {
 		AllowCredentials: true,
 		MaxAge:           12 * time.Hour,
 	}))
+	err := r.Run()
+	if err != nil {
+		fmt.Println("Error to up routes")
+		os.Exit(-1)
+	}
 
 	r.POST("/combinationGenerationCounter", CombinationGenerationCounterController.IncrementCombinationGenerationCounter)
 	r.GET("/combinationGenerationCounter", CombinationGenerationCounterController.ListAllCombinationsCounters)
@@ -44,10 +49,4 @@ func HandlerRoutes() {
 	r.GET("/", func(c *gin.Context) {
 		c.String(200, "Hello, World!")
 	})
-
-	err := r.Run()
-	if err != nil {
-		fmt.Println("Error to up routes")
-		os.Exit(-1)
-	}
 }
