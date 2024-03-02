@@ -45,10 +45,14 @@ jobs:
         uses: actions/setup-go@v5.0.0
 
       - name: Start MongoDB
-        run: docker-compose up -d
+        run: |
+          cd data
+          docker-compose up -d
 
       - name: Run Tests
         run: go test -p 1 ./src/...
 
       - name: Remove MongoDB container
-        run: docker-compose down
+        run: |
+          cd data 
+          docker-compose down
