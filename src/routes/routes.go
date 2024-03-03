@@ -29,14 +29,14 @@ func HandlerRoutes() *gin.Engine {
 			AllowHeaders:     []string{"Origin"},
 			ExposeHeaders:    []string{"Content-Length"},
 			AllowCredentials: true,
-			AllowOriginFunc: func(origin string) bool {
-				return origin == "https://localhost"
-			},
-			MaxAge: 12 * time.Hour,
+			MaxAge:           12 * time.Hour,
 		}))
 
-		r.Use(Middlewares.MethodsMiddleware())
-		r.Use(Middlewares.HTTPSOnlyMiddleware())
+		rateLimiter := Middlewares.NewRateLimiter(11, time.Minute)
+		r.Use(Middlewares.RequestLimitMiddleware(rateLimiter))
+		r.Use(Middlewares.AuthMiddleware())
+		//r.Use(Middlewares.MethodsMiddleware())
+		//r.Use(Middlewares.HTTPSOnlyMiddleware())
 	}
 
 	r.POST("/combinationGenerationCounter", CombinationGenerationCounterController.IncrementCombinationGenerationCounter)
