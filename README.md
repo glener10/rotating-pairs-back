@@ -77,6 +77,7 @@ You will need to a _.env_ file in root folder
 MONGODB_URI=mongodb://localhost:27017
 MONGODB_DATABASE_NAME=test
 ALLOW_URLS=*
+ENV=development
 ```
 
 <div id="testing"></div>
