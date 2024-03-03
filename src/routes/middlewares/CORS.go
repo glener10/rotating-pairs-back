@@ -10,6 +10,7 @@ import (
 func OriginMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		origin := c.Request.Host
+		origin2 := c.Request.Header.Get("Origin")
 
 		originAllowed := false
 		allowedUrls := getAllowedURLs()
@@ -21,7 +22,7 @@ func OriginMiddleware() gin.HandlerFunc {
 		}
 
 		if !originAllowed {
-			messageOriginNotAllowed := "Origin '" + origin + "not allowed"
+			messageOriginNotAllowed := "Origin '" + origin + "' not allowed, second origin: " + origin2
 			c.AbortWithStatusJSON(403, gin.H{"error": messageOriginNotAllowed})
 		} else {
 			c.Next()
