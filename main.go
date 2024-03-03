@@ -13,5 +13,6 @@ func main() {
 		return
 	}
 
-	routes.HandlerRoutes()
+	r := routes.HandlerRoutes()
+	routes.Listening(r)
 }
