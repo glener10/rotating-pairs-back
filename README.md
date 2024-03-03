@@ -78,6 +78,7 @@ MONGODB_URI=mongodb://localhost:27017
 MONGODB_DATABASE_NAME=test
 ALLOW_URLS=*
 ENV=development
+SECRET=banana
 ```
 
 <div id="testing"></div>
