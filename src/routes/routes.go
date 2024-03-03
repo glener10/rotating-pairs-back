@@ -19,6 +19,7 @@ func HandlerRoutes() *gin.Engine {
 
 	r.Use(Middlewares.OriginMiddleware())
 	r.Use(Middlewares.MethodsMiddleware())
+	r.Use(Middlewares.HTTPSOnlyMiddleware())
 
 	r.POST("/combinationGenerationCounter", CombinationGenerationCounterController.IncrementCombinationGenerationCounter)
 	r.GET("/combinationGenerationCounter", CombinationGenerationCounterController.ListAllCombinationsCounters)

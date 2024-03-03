@@ -75,3 +75,25 @@ func TestMethodOptionsReturn(t *testing.T) {
 
 	assert.Equal(t, response.Code, http.StatusOK, "Should return a 200 code")
 }
+
+func TestOnlyHttps(t *testing.T) {
+	r := SetupRoutes()
+	r.Use(HTTPSOnlyMiddleware())
+	r.GET("/combinationGenerationCounter", CombinationController.Combination)
+	req, _ := http.NewRequest("GET", "/combinationGenerationCounter", nil)
+	response := httptest.NewRecorder()
+	r.ServeHTTP(response, req)
+
+	expected := ErrorResponse{
+		Error:      "HTTPS only",
+		StatusCode: 403,
+	}
+
+	var actual ErrorResponse
+	err := json.NewDecoder(response.Body).Decode(&actual)
+	if err != nil {
+		t.Errorf("failed to decode response body: %v", err)
+	}
+
+	assert.Equal(t, actual, expected, "Should return 'HTTPS only' and 403 if the requisition its not HTTPS")
+}
