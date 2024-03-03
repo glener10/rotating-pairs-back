@@ -10,6 +10,7 @@ import (
 	"github.com/gin-gonic/gin"
 	CombinationGenerationCounterController "github.com/glener10/rotating-pairs-back/src/CombinationGenerationCounter/controllers"
 	CombinationController "github.com/glener10/rotating-pairs-back/src/Combinations/controllers"
+	Middlewares "github.com/glener10/rotating-pairs-back/src/routes/middlewares"
 )
 
 func HandlerRoutes() *gin.Engine {
@@ -31,6 +32,8 @@ func HandlerRoutes() *gin.Engine {
 			MaxAge:           12 * time.Hour,
 		}))
 
+		rateLimiter := Middlewares.NewRateLimiter(10, time.Minute)
+		r.Use(Middlewares.RequestLimitMiddleware(rateLimiter))
 		//r.Use(Middlewares.MethodsMiddleware())
 		//r.Use(Middlewares.HTTPSOnlyMiddleware())
 	}

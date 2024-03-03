@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	CombinationController "github.com/glener10/rotating-pairs-back/src/Combinations/controllers"
@@ -87,6 +88,30 @@ func TestOnlyHttps(t *testing.T) {
 	expected := ErrorResponse{
 		Error:      "HTTPS only, your protocol is: HTTP/1.1",
 		StatusCode: 403,
+	}
+
+	var actual ErrorResponse
+	err := json.NewDecoder(response.Body).Decode(&actual)
+	if err != nil {
+		t.Errorf("failed to decode response body: %v", err)
+	}
+
+	assert.Equal(t, actual, expected, "Should return 'HTTPS only' and 403 if the requisition its not HTTPS")
+}
+
+func TestRateLimiter(t *testing.T) {
+	r := SetupRoutes()
+	rateLimiter := NewRateLimiter(1, time.Minute)
+	r.Use(RequestLimitMiddleware(rateLimiter))
+	r.GET("/combinationGenerationCounter", CombinationController.Combination)
+	req, _ := http.NewRequest("GET", "/combinationGenerationCounter", nil)
+	response := httptest.NewRecorder()
+	r.ServeHTTP(response, req)
+	r.ServeHTTP(response, req)
+
+	expected := ErrorResponse{
+		Error:      "Too Many Requests",
+		StatusCode: 429,
 	}
 
 	var actual ErrorResponse
