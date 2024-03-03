@@ -17,9 +17,11 @@ func HandlerRoutes() *gin.Engine {
 		c.String(200, "Hello, World!")
 	})
 
-	r.Use(Middlewares.OriginMiddleware())
-	r.Use(Middlewares.MethodsMiddleware())
-	r.Use(Middlewares.HTTPSOnlyMiddleware())
+	if os.Getenv("ENV") != "development" {
+		r.Use(Middlewares.OriginMiddleware())
+		r.Use(Middlewares.MethodsMiddleware())
+		r.Use(Middlewares.HTTPSOnlyMiddleware())
+	}
 
 	r.POST("/combinationGenerationCounter", CombinationGenerationCounterController.IncrementCombinationGenerationCounter)
 	r.GET("/combinationGenerationCounter", CombinationGenerationCounterController.ListAllCombinationsCounters)
