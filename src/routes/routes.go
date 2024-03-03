@@ -24,7 +24,7 @@ func HandlerRoutes() *gin.Engine {
 
 		r.Use(cors.New(cors.Config{
 			AllowOrigins:     allowedUrls,
-			AllowMethods:     []string{"PUT", "PATCH"},
+			AllowMethods:     []string{"GET", "POST"},
 			AllowHeaders:     []string{"Origin"},
 			ExposeHeaders:    []string{"Content-Length"},
 			AllowCredentials: true,
