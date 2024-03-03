@@ -1,11 +1,11 @@
-# [v1.0.3] - 03/03/2024 (dd/mm/YYYY)
-
-- Configuring Methods Allowed
-- Configuring to only accepts HTTPS protocols
+# [vX.X.X] - XX/XX/XXXX (dd/mm/YYYY)
 
 # [v1.0.2] - 02/03/2024 (dd/mm/YYYY)
 
 - Configuring CORS policy
+- Configuring Methods Allowed
+- Create middleware to only accepts HTTPS protocols
+- Configuring Rater Limit
 
 # [v1.0.1] - 02/03/2024 (dd/mm/YYYY)
 
