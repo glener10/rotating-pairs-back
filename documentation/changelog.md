@@ -1,10 +1,13 @@
+# [v1.0.3] - 03/03/2024 (dd/mm/YYYY)
+
+- Configuring Methods Allowed
+- Create middleware to only accepts HTTPS protocols
+- Create Rater Limit middleware
+- Implement Auth Middleware
+
 # [v1.0.2] - 02/03/2024 (dd/mm/YYYY)
 
 - Configuring CORS policy
-- Configuring Methods Allowed
-- Create middleware to only accepts HTTPS protocols
-- Configuring Rater Limit
-- Create and implement Auth Middleware
 
 # [v1.0.1] - 02/03/2024 (dd/mm/YYYY)
 
