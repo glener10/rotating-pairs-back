@@ -34,6 +34,7 @@ func HandlerRoutes() *gin.Engine {
 
 		rateLimiter := Middlewares.NewRateLimiter(10, time.Minute)
 		r.Use(Middlewares.RequestLimitMiddleware(rateLimiter))
+		r.Use(Middlewares.AuthMiddleware())
 		//r.Use(Middlewares.MethodsMiddleware())
 		//r.Use(Middlewares.HTTPSOnlyMiddleware())
 	}
