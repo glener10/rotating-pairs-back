@@ -85,7 +85,7 @@ func TestOnlyHttps(t *testing.T) {
 	r.ServeHTTP(response, req)
 
 	expected := ErrorResponse{
-		Error:      "HTTPS only",
+		Error:      "HTTPS only, your protocol is: HTTP/1.1",
 		StatusCode: 403,
 	}
 

@@ -10,7 +10,6 @@ import (
 	"github.com/gin-gonic/gin"
 	CombinationGenerationCounterController "github.com/glener10/rotating-pairs-back/src/CombinationGenerationCounter/controllers"
 	CombinationController "github.com/glener10/rotating-pairs-back/src/Combinations/controllers"
-	Middlewares "github.com/glener10/rotating-pairs-back/src/routes/middlewares"
 )
 
 func HandlerRoutes() *gin.Engine {
@@ -29,14 +28,11 @@ func HandlerRoutes() *gin.Engine {
 			AllowHeaders:     []string{"Origin"},
 			ExposeHeaders:    []string{"Content-Length"},
 			AllowCredentials: true,
-			AllowOriginFunc: func(origin string) bool {
-				return origin == "https://localhost"
-			},
-			MaxAge: 12 * time.Hour,
+			MaxAge:           12 * time.Hour,
 		}))
 
-		r.Use(Middlewares.MethodsMiddleware())
-		r.Use(Middlewares.HTTPSOnlyMiddleware())
+		//r.Use(Middlewares.MethodsMiddleware())
+		//r.Use(Middlewares.HTTPSOnlyMiddleware())
 	}
 
 	r.POST("/combinationGenerationCounter", CombinationGenerationCounterController.IncrementCombinationGenerationCounter)
