@@ -32,7 +32,7 @@ func HandlerRoutes() *gin.Engine {
 			MaxAge:           12 * time.Hour,
 		}))
 
-		rateLimiter := Middlewares.NewRateLimiter(10, time.Minute)
+		rateLimiter := Middlewares.NewRateLimiter(11, time.Minute)
 		r.Use(Middlewares.RequestLimitMiddleware(rateLimiter))
 		r.Use(Middlewares.AuthMiddleware())
 		//r.Use(Middlewares.MethodsMiddleware())
