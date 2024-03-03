@@ -1,3 +1,8 @@
+# [v1.0.3] - 03/03/2024 (dd/mm/YYYY)
+
+- Configuring Methods Allowed
+- Configuring to only accepts HTTPS protocols
+
 # [v1.0.2] - 02/03/2024 (dd/mm/YYYY)
 
 - Configuring CORS policy
