@@ -107,6 +107,8 @@ go run .\main.go
 
 Now you can open [http://localhost:8080](http://localhost:8080) with your browser to see the result.
 
+You can see the routes documentation in '_rest_' folder, this files using de REST Client extension of VSCode, but you can export it any way you want
+
 ## 📖 **Learn More**
 
 To learn more about technologies used in the application:
