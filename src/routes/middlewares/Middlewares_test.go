@@ -118,13 +118,13 @@ func TestRateLimiter(t *testing.T) {
 		StatusCode: 429,
 	}
 
-	var actual ErrorResponse
-	err := json.NewDecoder(response.Body).Decode(&actual)
+	var errorResponseDecoded ErrorResponse
+	err := json.NewDecoder(response.Body).Decode(&errorResponseDecoded)
 	if err != nil {
 		t.Errorf("failed to decode response body: %v", err)
 	}
 
-	assert.Equal(t, actual, expected, "Should return 'Too Many Requests' and 429 if the requisition pass the rate limiter")
+	assert.Equal(t, errorResponseDecoded, expected, "Should return 'Too Many Requests' and 429 if the requisition pass the rate limiter")
 }
 
 func TestAuthWithNoToken(t *testing.T) {
