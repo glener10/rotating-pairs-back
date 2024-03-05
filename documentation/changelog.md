@@ -1,3 +1,9 @@
+# [v1.0.4] - 05/03/2024 (dd/mm/YYYY)
+
+- Fix allowed headers to front production application
+- POST /combination refactoring to create a 'CombinationGenerationCounter' if it doesn't exist
+- Updating _init-mongo.js_ with basic values
+
 # [v1.0.3] - 03/03/2024 (dd/mm/YYYY)
 
 - Configuring Methods Allowed
