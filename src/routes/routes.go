@@ -23,8 +23,8 @@ func HandlerRoutes() *gin.Engine {
 	r.Use(cors.New(cors.Config{
 		AllowOrigins:     getAllowedURLs(),
 		AllowMethods:     []string{"GET", "POST"},
-		AllowHeaders:     []string{"Origin, Content-Type, Authorization"},
-		ExposeHeaders:    []string{"Content-Length, Content-Type"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
+		ExposeHeaders:    []string{"Content-Length", "Content-Type"},
 		AllowCredentials: true,
 		MaxAge:           12 * time.Hour,
 	}))
