@@ -20,18 +20,16 @@ func HandlerRoutes() *gin.Engine {
 		c.String(200, "Hello, World!")
 	})
 
+	r.Use(cors.New(cors.Config{
+		AllowOrigins:     getAllowedURLs(),
+		AllowMethods:     []string{"GET", "POST"},
+		AllowHeaders:     []string{"Origin, Content-Type, Authorization"},
+		ExposeHeaders:    []string{"Content-Length, Content-Type"},
+		AllowCredentials: true,
+		MaxAge:           12 * time.Hour,
+	}))
+
 	if os.Getenv("ENV") != "development" {
-		allowedUrls := getAllowedURLs()
-
-		r.Use(cors.New(cors.Config{
-			AllowOrigins:     allowedUrls,
-			AllowMethods:     []string{"GET", "POST"},
-			AllowHeaders:     []string{"Origin"},
-			ExposeHeaders:    []string{"Content-Length"},
-			AllowCredentials: true,
-			MaxAge:           12 * time.Hour,
-		}))
-
 		rateLimiter := Middlewares.NewRateLimiter(11, time.Minute)
 		r.Use(Middlewares.RequestLimitMiddleware(rateLimiter))
 		r.Use(Middlewares.AuthMiddleware())
@@ -54,6 +52,9 @@ func Listening(r *gin.Engine) {
 }
 
 func getAllowedURLs() []string {
+	if os.Getenv("ENV") == "development" {
+		return []string{"*"}
+	}
 	allowedURLsString := os.Getenv("ALLOW_URLS")
 	if allowedURLsString == "" {
 		return nil
