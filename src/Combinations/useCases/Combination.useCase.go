@@ -20,10 +20,13 @@ func Combination(c *gin.Context, combinationRequest CombinationRequestDto.Combin
 	}
 	_, err = CombinationGenerationCounterRepo.IncrementCombinationGenerationCounter(combinationRequest.NumberOfInputs)
 	if err != nil {
-		statusCode := http.StatusUnprocessableEntity
-		errorMessage := err.Error()
-		c.JSON(statusCode, gin.H{"error": errorMessage, "statusCode": statusCode})
-		return
+		_, err = CombinationGenerationCounterRepo.CreateCombinationGenerationCounter(combinationRequest.NumberOfInputs)
+		if err != nil {
+			statusCode := http.StatusUnprocessableEntity
+			errorMessage := err.Error()
+			c.JSON(statusCode, gin.H{"error": errorMessage, "statusCode": statusCode})
+			return
+		}
 	}
 	c.JSON(http.StatusOK, results)
 }

@@ -1,8 +1,8 @@
 db.createCollection('TotalCombinationGenerationAccordingNumberOfInputs');
 
 db.TotalCombinationGenerationAccordingNumberOfInputs.insertMany([
-  { NumberOfInputs: 1, Count: 0 },
-  { NumberOfInputs: 2, Count: 0 }
+  { NumberOfInputs: 2, Count: 0 },
+  { NumberOfInputs: 3, Count: 0 }
 ]);
 
 db.createCollection('Combinations');
