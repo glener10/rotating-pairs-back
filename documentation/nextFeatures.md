@@ -1,5 +1,3 @@
-- Documentation of Generate UseCase
 - Implement Generate UseCase
 - Basic tests
-- Tests abouts repetitions and verifications of the combinations
 - Documentation routes with Go Swagger
