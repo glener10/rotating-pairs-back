@@ -56,3 +56,44 @@ func checkOneCombination(combination CombinationEntity.Pair, indexSprintYourself
 	}
 	return true
 }
+
+func checkIfAllIndexesAreValid(sprints []CombinationEntity.Sprint, numberOfInputs int) bool {
+	for indexSprint := 0; indexSprint < len(sprints); indexSprint++ {
+		sprint := sprints[indexSprint]
+		for indexCombinations := 0; indexCombinations < len(sprint.Combinations); indexCombinations++ {
+			combination := sprint.Combinations[indexCombinations]
+			if combination.PairOne >= numberOfInputs || combination.PairTwo >= numberOfInputs {
+				return false
+			}
+		}
+	}
+	return true
+}
+
+func checkIfAnyInputFromThePairIsRepeatedInTheCombinationsOfASprint(sprints []CombinationEntity.Sprint) bool {
+	for indexSprint := 0; indexSprint < len(sprints); indexSprint++ {
+		sprint := sprints[indexSprint]
+		for indexCombinations := 0; indexCombinations < len(sprint.Combinations); indexCombinations++ {
+			combination := sprint.Combinations[indexCombinations]
+			if !checkAnyPairDontRepeatInTheCombinations(combination, indexCombinations, sprint.Combinations) {
+				return false
+			}
+		}
+	}
+	return true
+}
+
+func checkAnyPairDontRepeatInTheCombinations(combination CombinationEntity.Pair, indexCombinationsYourself int, combinations []CombinationEntity.Pair) bool {
+	for indexCombinations := 0; indexCombinations < len(combinations); indexCombinations++ {
+		combinationForTesting := combinations[indexCombinations]
+		if indexCombinations != indexCombinationsYourself {
+			if combination.PairOne == combinationForTesting.PairOne ||
+				combination.PairOne == combinationForTesting.PairTwo ||
+				combination.PairTwo == combinationForTesting.PairOne ||
+				combination.PairTwo == combinationForTesting.PairTwo {
+				return false
+			}
+		}
+	}
+	return true
+}
