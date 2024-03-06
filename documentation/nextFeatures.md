@@ -1,2 +1,5 @@
-- Describes the useCase that will try to generate and save combinations according to X number of inputs (Implementing Logical in the Front-End)
+- Documentation of Generate UseCase
+- Implement Generate UseCase
+- Basic tests
+- Tests abouts repetitions and verifications of the combinations
 - Documentation routes with Go Swagger
