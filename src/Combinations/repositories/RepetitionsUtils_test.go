@@ -55,6 +55,29 @@ func returnNumberOfSprints(numberOfNamesIsOdd bool, inputNamesInArray []string) 
 }
 
 // Start Checkings
+/* func doAllChecksInSprint(sprints []CombinationEntity.Sprint, numberOfInputs int) bool {
+	if !checkIfAllIndexesAreValid(sprints, numberOfInputs) {
+		return false
+	}
+	if !checkIfThereIsARepeatedCombination(sprints) {
+		return false
+	}
+	if !checkIfAnyInputFromThePairIsRepeatedInTheCombinationsOfASprint(sprints) {
+		return false
+	}
+	indexArrayWithNumberInputs := generateIndexArrayWithSizeOfNewEntry(numberOfInputs)
+	numberOfInputsIsOdd := checkIfArrayIsOdd(indexArrayWithNumberInputs)
+	numberOfCombinationPerSprint := returnNumberOfCombinationPerSprintRoundedDown(numberOfInputsIsOdd, indexArrayWithNumberInputs)
+	if !checkIfAllSprintsHaveAValidNumberOfCombinations(sprints, numberOfCombinationPerSprint) {
+		return false
+	}
+	numberOfSprints := returnNumberOfSprints(numberOfInputsIsOdd, indexArrayWithNumberInputs)
+	if !checkIfAllCombinationsHaveAValidNumberOfSprint(sprints, numberOfSprints) {
+		return false
+	}
+	return true
+} */
+
 func checkIfThereIsARepeatedCombination(Sprints []CombinationEntity.Sprint) bool {
 	for indexSprint := 0; indexSprint < len(Sprints); indexSprint++ {
 		sprint := Sprints[indexSprint]
