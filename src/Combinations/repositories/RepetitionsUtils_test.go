@@ -2,7 +2,6 @@ package CombinationRepo
 
 import (
 	"fmt"
-	"math"
 
 	CombinationEntity "github.com/glener10/rotating-pairs-back/src/Combinations/entities"
 )
@@ -43,7 +42,7 @@ func returnNumberOfCombinationPerSprintRoundedDown(numberOfNamesIsOdd bool, inpu
 	if numberOfNamesIsOdd {
 		numberOfCombinationPerSprint++
 	}
-	return int(math.Floor(float64(numberOfCombinationPerSprint)))
+	return numberOfCombinationPerSprint
 }
 
 func returnNumberOfSprints(numberOfNamesIsOdd bool, inputNamesInArray []string) int {
