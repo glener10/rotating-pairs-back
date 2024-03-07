@@ -1,3 +1,8 @@
+# [v1.1.0] - XX/XX/XXXX (dd/mm/YYYY)
+
+- New route (POST /generate) that tries to generate combination with input number X without repetitions
+- New test switches to check for repetitions in combinations and invalid numbers
+
 # [v1.0.4] - 05/03/2024 (dd/mm/YYYY)
 
 - Fix allowed headers to front production application

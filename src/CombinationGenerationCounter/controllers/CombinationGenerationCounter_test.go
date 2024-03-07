@@ -12,8 +12,7 @@ import (
 	"github.com/gin-gonic/gin"
 	CombinationGenerationCounterEntity "github.com/glener10/rotating-pairs-back/src/CombinationGenerationCounter/entities"
 	CombinationGenerationCounterRepo "github.com/glener10/rotating-pairs-back/src/CombinationGenerationCounter/repositories"
-	CombinationGenerationCounterUtils "github.com/glener10/rotating-pairs-back/src/CombinationGenerationCounter/utils"
-	CombinationRequestDto "github.com/glener10/rotating-pairs-back/src/common/interfaces"
+	CombinationRequestDto "github.com/glener10/rotating-pairs-back/src/common/dtos"
 	Utils "github.com/glener10/rotating-pairs-back/src/common/utils"
 	"github.com/stretchr/testify/assert"
 )
@@ -27,11 +26,11 @@ func TestMain(m *testing.M) {
 	if err := Utils.LoadEnvironmentVariables("../../../.env"); err != nil {
 		log.Fatalf("Error to load environment variables: %s", err.Error())
 	}
-	if err := CombinationGenerationCounterUtils.Truncate(); err != nil {
+	if err := CombinationGenerationCounterRepo.Truncate(); err != nil {
 		log.Fatalf("Error to exec truncate method before Controler Combination Counter tests execution: %s", err.Error())
 	}
 	exitCode := m.Run()
-	if err := CombinationGenerationCounterUtils.CleanCollection(); err != nil {
+	if err := CombinationGenerationCounterRepo.CleanCollection(); err != nil {
 		log.Fatalf("Error to exec cleaning collection after Controler Combination Counter tests execution: %s", err.Error())
 	}
 	os.Exit(exitCode)
@@ -142,7 +141,7 @@ func TestIncrementRouteSuccessCase(t *testing.T) {
 }
 
 func TestListAllCombinationsCountersRouteSuccessCase(t *testing.T) {
-	if err := CombinationGenerationCounterUtils.CleanCollection(); err != nil {
+	if err := CombinationGenerationCounterRepo.CleanCollection(); err != nil {
 		log.Fatalf("Error to exec cleaning collection after repository tests execution: %s", err.Error())
 	}
 

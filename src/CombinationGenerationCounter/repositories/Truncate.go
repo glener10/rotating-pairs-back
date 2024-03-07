@@ -1,4 +1,4 @@
-package CombinationGenerationCounterUtils
+package CombinationGenerationCounterRepo
 
 import (
 	"context"

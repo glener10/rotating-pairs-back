@@ -5,7 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	CombinationGenerationCounterUseCases "github.com/glener10/rotating-pairs-back/src/CombinationGenerationCounter/useCases"
-	CombinationRequestDto "github.com/glener10/rotating-pairs-back/src/common/interfaces"
+	CombinationRequestDto "github.com/glener10/rotating-pairs-back/src/common/dtos"
 )
 
 func IncrementCombinationGenerationCounter(c *gin.Context) {
