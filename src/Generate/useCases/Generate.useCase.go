@@ -7,6 +7,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	CombinationRepo "github.com/glener10/rotating-pairs-back/src/Combinations/repositories"
+	CombinationUtils "github.com/glener10/rotating-pairs-back/src/Combinations/utils"
 	GenerateRequestDto "github.com/glener10/rotating-pairs-back/src/Generate/dtos"
 )
 
@@ -19,9 +20,9 @@ func Generate(c *gin.Context, combinationRequest GenerateRequestDto.GenerateRequ
 		return
 	}
 	arrayOfPositions := returnArrayOfIndexOfNumberOfInputsSize(NumberOfInputs)
-	numberOfInputsIsOdd := CombinationRepo.CheckIfArrayIsOdd(arrayOfPositions)
-	numberOfSprint := CombinationRepo.ReturnNumberOfSprints(numberOfInputsIsOdd, arrayOfPositions)
-	numberOfCombinationPerSprint := CombinationRepo.ReturnNumberOfCombinationPerSprintRoundedDown(numberOfInputsIsOdd, arrayOfPositions)
+	numberOfInputsIsOdd := CombinationUtils.CheckIfArrayIsOdd(arrayOfPositions)
+	numberOfSprint := CombinationUtils.ReturnNumberOfSprints(numberOfInputsIsOdd, arrayOfPositions)
+	numberOfCombinationPerSprint := CombinationUtils.ReturnNumberOfCombinationPerSprintRoundedDown(numberOfInputsIsOdd, arrayOfPositions)
 
 	sizeOfLoop := returnSizeOfCombinationsLoop(arrayOfPositions, numberOfCombinationPerSprint)
 

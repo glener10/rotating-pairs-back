@@ -1,26 +1,11 @@
-package CombinationRepo
+package CombinationUtils
 
 import (
 	"fmt"
-
-	CombinationEntity "github.com/glener10/rotating-pairs-back/src/Combinations/entities"
 )
 
-func returnAllCombinations() []*CombinationEntity.Combination {
-	var combinations []*CombinationEntity.Combination
-
-	for i := 2; i <= 3; i++ {
-		found, err := FindCombination(int16(i))
-		if err != nil {
-			continue
-		}
-		combinations = append(combinations, found)
-	}
-	return combinations
-}
-
-func returnArrayAndBooleanEvenOrOdd(numberOfInputs int) (indexArrayWithNumberInputs []string, numberOfInputsIsOdd bool) {
-	indexArrayWithNumberInputs = generateIndexArrayWithSizeOfNewEntry(numberOfInputs)
+func ReturnArrayAndBooleanEvenOrOdd(numberOfInputs int) (indexArrayWithNumberInputs []string, numberOfInputsIsOdd bool) {
+	indexArrayWithNumberInputs = GenerateIndexArrayWithSizeOfNewEntry(numberOfInputs)
 	numberOfInputsIsOdd = CheckIfArrayIsOdd(indexArrayWithNumberInputs)
 	return indexArrayWithNumberInputs, numberOfInputsIsOdd
 }
@@ -29,7 +14,7 @@ func CheckIfArrayIsOdd(inputNamesInArray []string) bool {
 	return len(inputNamesInArray)%2 != 0
 }
 
-func generateIndexArrayWithSizeOfNewEntry(numberOfInputs int) []string {
+func GenerateIndexArrayWithSizeOfNewEntry(numberOfInputs int) []string {
 	var arraySizeOfInput []string
 	for index := 0; index < numberOfInputs; index++ {
 		arraySizeOfInput = append(arraySizeOfInput, fmt.Sprintf("%d", index))

@@ -1,4 +1,4 @@
-package CombinationRepo
+package CombinationUtils
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 	CombinationEntity "github.com/glener10/rotating-pairs-back/src/Combinations/entities"
 )
 
-/* func doAllChecksInSprint(sprints []CombinationEntity.Sprint, numberOfInputs int) bool {
+/* func DoAllChecksInSprint(sprints []CombinationEntity.Sprint, numberOfInputs int) bool {
 	if !checkIfAllIndexesAreValid(sprints, numberOfInputs) {
 		return false
 	}
@@ -29,12 +29,12 @@ import (
 	return true
 } */
 
-func checkIfThereIsARepeatedCombination(Sprints []CombinationEntity.Sprint) bool {
+func CheckIfThereIsARepeatedCombination(Sprints []CombinationEntity.Sprint) bool {
 	for indexSprint := 0; indexSprint < len(Sprints); indexSprint++ {
 		sprint := Sprints[indexSprint]
 		for indexCombinations := 0; indexCombinations < len(sprint.Combinations); indexCombinations++ {
 			combination := sprint.Combinations[indexCombinations]
-			if !checkOneCombination(combination, indexSprint, indexCombinations, Sprints) {
+			if !CheckOneCombination(combination, indexSprint, indexCombinations, Sprints) {
 				return false
 			}
 		}
@@ -42,7 +42,7 @@ func checkIfThereIsARepeatedCombination(Sprints []CombinationEntity.Sprint) bool
 	return true
 }
 
-func checkOneCombination(combination CombinationEntity.Pair, indexSprintYourself, indexCombinationsYourself int, sprints []CombinationEntity.Sprint) bool {
+func CheckOneCombination(combination CombinationEntity.Pair, indexSprintYourself, indexCombinationsYourself int, sprints []CombinationEntity.Sprint) bool {
 	for indexSprint := 0; indexSprint < len(sprints); indexSprint++ {
 		sprint := sprints[indexSprint]
 
@@ -67,7 +67,7 @@ func checkOneCombination(combination CombinationEntity.Pair, indexSprintYourself
 	return true
 }
 
-func checkIfAllIndexesAreValid(sprints []CombinationEntity.Sprint, numberOfInputs int) bool {
+func CheckIfAllIndexesAreValid(sprints []CombinationEntity.Sprint, numberOfInputs int) bool {
 	for indexSprint := 0; indexSprint < len(sprints); indexSprint++ {
 		sprint := sprints[indexSprint]
 		for indexCombinations := 0; indexCombinations < len(sprint.Combinations); indexCombinations++ {
@@ -80,12 +80,12 @@ func checkIfAllIndexesAreValid(sprints []CombinationEntity.Sprint, numberOfInput
 	return true
 }
 
-func checkIfAnyInputFromThePairIsRepeatedInTheCombinationsOfASprint(sprints []CombinationEntity.Sprint) bool {
+func CheckIfAnyInputFromThePairIsRepeatedInTheCombinationsOfASprint(sprints []CombinationEntity.Sprint) bool {
 	for indexSprint := 0; indexSprint < len(sprints); indexSprint++ {
 		sprint := sprints[indexSprint]
 		for indexCombinations := 0; indexCombinations < len(sprint.Combinations); indexCombinations++ {
 			combination := sprint.Combinations[indexCombinations]
-			if !checkAnyPairDontRepeatInTheCombinations(combination, indexCombinations, sprint.Combinations) {
+			if !CheckAnyPairDontRepeatInTheCombinations(combination, indexCombinations, sprint.Combinations) {
 				return false
 			}
 		}
@@ -93,7 +93,7 @@ func checkIfAnyInputFromThePairIsRepeatedInTheCombinationsOfASprint(sprints []Co
 	return true
 }
 
-func checkAnyPairDontRepeatInTheCombinations(combination CombinationEntity.Pair, indexCombinationsYourself int, combinations []CombinationEntity.Pair) bool {
+func CheckAnyPairDontRepeatInTheCombinations(combination CombinationEntity.Pair, indexCombinationsYourself int, combinations []CombinationEntity.Pair) bool {
 	for indexCombinations := 0; indexCombinations < len(combinations); indexCombinations++ {
 		combinationForTesting := combinations[indexCombinations]
 		if indexCombinations != indexCombinationsYourself {
@@ -108,7 +108,7 @@ func checkAnyPairDontRepeatInTheCombinations(combination CombinationEntity.Pair,
 	return true
 }
 
-func checkIfAllSprintsHaveAValidNumberOfCombinations(sprints []CombinationEntity.Sprint, numberOfCombinationPerSprint int) bool {
+func CheckIfAllSprintsHaveAValidNumberOfCombinations(sprints []CombinationEntity.Sprint, numberOfCombinationPerSprint int) bool {
 	for indexSprint := 0; indexSprint < len(sprints); indexSprint++ {
 		if len(sprints[indexSprint].Combinations) != numberOfCombinationPerSprint {
 			return false
@@ -117,6 +117,6 @@ func checkIfAllSprintsHaveAValidNumberOfCombinations(sprints []CombinationEntity
 	return true
 }
 
-func checkIfAllCombinationsHaveAValidNumberOfSprint(sprints []CombinationEntity.Sprint, numberOfSprints int) bool {
+func CheckIfAllCombinationsHaveAValidNumberOfSprint(sprints []CombinationEntity.Sprint, numberOfSprints int) bool {
 	return len(sprints) == numberOfSprints
 }
