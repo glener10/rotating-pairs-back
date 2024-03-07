@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	GenerateRequestDto "github.com/glener10/rotating-pairs-back/src/Generate/interfaces"
+	GenerateRequestDto "github.com/glener10/rotating-pairs-back/src/Generate/dtos"
 	GenerateUseCases "github.com/glener10/rotating-pairs-back/src/Generate/useCases"
 )
 

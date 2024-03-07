@@ -14,7 +14,7 @@ import (
 	CombinationGenerationCounterRepo "github.com/glener10/rotating-pairs-back/src/CombinationGenerationCounter/repositories"
 	CombinationEntity "github.com/glener10/rotating-pairs-back/src/Combinations/entities"
 	CombinationRepo "github.com/glener10/rotating-pairs-back/src/Combinations/repositories"
-	CombinationRequestDto "github.com/glener10/rotating-pairs-back/src/common/interfaces"
+	CombinationRequestDto "github.com/glener10/rotating-pairs-back/src/common/dtos"
 	Utils "github.com/glener10/rotating-pairs-back/src/common/utils"
 	"github.com/stretchr/testify/assert"
 )

@@ -1,11 +1,12 @@
 package GenerateUseCases
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 	CombinationRepo "github.com/glener10/rotating-pairs-back/src/Combinations/repositories"
-	GenerateRequestDto "github.com/glener10/rotating-pairs-back/src/Generate/interfaces"
+	GenerateRequestDto "github.com/glener10/rotating-pairs-back/src/Generate/dtos"
 )
 
 func Generate(c *gin.Context, combinationRequest GenerateRequestDto.GenerateRequest) {
@@ -16,6 +17,7 @@ func Generate(c *gin.Context, combinationRequest GenerateRequestDto.GenerateRequ
 		c.JSON(statusCode, gin.H{"error": "There is already a transaction with this number of entries", "statusCode": statusCode})
 		return
 	}
+	fmt.Println(results)
 	arrayOfPositions := returnArrayOfIndexOfNumberOfInputsSize(NumberOfInputs)
 	c.JSON(http.StatusOK, arrayOfPositions)
 }
