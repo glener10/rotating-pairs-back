@@ -29,10 +29,8 @@ func Generate(c *gin.Context, combinationRequest GenerateRequestDto.GenerateRequ
 }
 
 func shouldReturn() bool {
-	rand.Seed(time.Now().UnixNano())
-	randomNumber := rand.Intn(101) // Gera um número aleatório entre 0 e 100
-	if randomNumber < 50 {
-		return true
-	}
-	return false
+	source := rand.NewSource(time.Now().UnixNano())
+	rng := rand.New(source)
+	randomNumber := rng.Intn(101)
+	return randomNumber < 50
 }
