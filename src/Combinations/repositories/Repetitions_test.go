@@ -31,7 +31,7 @@ func TestIfAllSprintsHaveAValidNumberOfCombinationsPerSprint(t *testing.T) {
 	combinations := returnAllCombinations()
 	for i := 0; i < len(combinations); i++ {
 		indexArrayWithNumberInputs, numberOfInputsIsOdd := returnArrayAndBooleanEvenOrOdd(combinations[i].NumberOfInputs)
-		generateNumberOfCombinationsPerSprint := returnNumberOfCombinationPerSprintRoundedDown(numberOfInputsIsOdd, indexArrayWithNumberInputs)
+		generateNumberOfCombinationsPerSprint := ReturnNumberOfCombinationPerSprintRoundedDown(numberOfInputsIsOdd, indexArrayWithNumberInputs)
 
 		assert.Equal(t, generateNumberOfCombinationsPerSprint, combinations[i].NumberOfCombinationsPerSprint, "Must has a correct number of combinations per sprint")
 		assert.Equal(t, checkIfAllSprintsHaveAValidNumberOfCombinations(combinations[i].Sprints, generateNumberOfCombinationsPerSprint), true, "All elements must has a correct number of combinations per sprint")
@@ -42,7 +42,7 @@ func TestIfAllCombinationsHaveAValidNumberOfSprint(t *testing.T) {
 	combinations := returnAllCombinations()
 	for i := 0; i < len(combinations); i++ {
 		indexArrayWithNumberInputs, numberOfInputsIsOdd := returnArrayAndBooleanEvenOrOdd(combinations[i].NumberOfInputs)
-		generateNumberOfSprints := returnNumberOfSprints(numberOfInputsIsOdd, indexArrayWithNumberInputs)
+		generateNumberOfSprints := ReturnNumberOfSprints(numberOfInputsIsOdd, indexArrayWithNumberInputs)
 
 		assert.Equal(t, generateNumberOfSprints, combinations[i].NumberOfSprints, "Must has a correct number of sprints")
 		assert.Equal(t, checkIfAllCombinationsHaveAValidNumberOfSprint(combinations[i].Sprints, generateNumberOfSprints), true, "All elements must has a correct number of sprints")

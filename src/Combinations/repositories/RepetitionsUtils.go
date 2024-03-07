@@ -21,11 +21,11 @@ func returnAllCombinations() []*CombinationEntity.Combination {
 
 func returnArrayAndBooleanEvenOrOdd(numberOfInputs int) (indexArrayWithNumberInputs []string, numberOfInputsIsOdd bool) {
 	indexArrayWithNumberInputs = generateIndexArrayWithSizeOfNewEntry(numberOfInputs)
-	numberOfInputsIsOdd = checkIfArrayIsOdd(indexArrayWithNumberInputs)
+	numberOfInputsIsOdd = CheckIfArrayIsOdd(indexArrayWithNumberInputs)
 	return indexArrayWithNumberInputs, numberOfInputsIsOdd
 }
 
-func checkIfArrayIsOdd(inputNamesInArray []string) bool {
+func CheckIfArrayIsOdd(inputNamesInArray []string) bool {
 	return len(inputNamesInArray)%2 != 0
 }
 
@@ -37,7 +37,7 @@ func generateIndexArrayWithSizeOfNewEntry(numberOfInputs int) []string {
 	return arraySizeOfInput
 }
 
-func returnNumberOfCombinationPerSprintRoundedDown(numberOfNamesIsOdd bool, inputNamesInArray []string) int {
+func ReturnNumberOfCombinationPerSprintRoundedDown(numberOfNamesIsOdd bool, inputNamesInArray []string) int {
 	numberOfCombinationPerSprint := len(inputNamesInArray) / 2
 	if numberOfNamesIsOdd {
 		numberOfCombinationPerSprint++
@@ -45,7 +45,7 @@ func returnNumberOfCombinationPerSprintRoundedDown(numberOfNamesIsOdd bool, inpu
 	return numberOfCombinationPerSprint
 }
 
-func returnNumberOfSprints(numberOfNamesIsOdd bool, inputNamesInArray []string) int {
+func ReturnNumberOfSprints(numberOfNamesIsOdd bool, inputNamesInArray []string) int {
 	numberOfSprints := len(inputNamesInArray) - 1
 	if numberOfNamesIsOdd {
 		numberOfSprints++
