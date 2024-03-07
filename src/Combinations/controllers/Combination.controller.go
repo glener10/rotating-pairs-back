@@ -5,7 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	CombinationUseCases "github.com/glener10/rotating-pairs-back/src/Combinations/useCases"
-	CombinationRequestDto "github.com/glener10/rotating-pairs-back/src/common/interfaces"
+	CombinationRequestDto "github.com/glener10/rotating-pairs-back/src/common/dtos"
 )
 
 func Combination(c *gin.Context) {

@@ -10,6 +10,7 @@ import (
 	"github.com/gin-gonic/gin"
 	CombinationGenerationCounterController "github.com/glener10/rotating-pairs-back/src/CombinationGenerationCounter/controllers"
 	CombinationController "github.com/glener10/rotating-pairs-back/src/Combinations/controllers"
+	GenerateController "github.com/glener10/rotating-pairs-back/src/Generate/controllers"
 	Middlewares "github.com/glener10/rotating-pairs-back/src/routes/middlewares"
 )
 
@@ -40,6 +41,7 @@ func HandlerRoutes() *gin.Engine {
 	r.POST("/combinationGenerationCounter", CombinationGenerationCounterController.IncrementCombinationGenerationCounter)
 	r.GET("/combinationGenerationCounter", CombinationGenerationCounterController.ListAllCombinationsCounters)
 	r.POST("/combination", CombinationController.Combination)
+	r.POST("/generate", GenerateController.Generate)
 	return r
 }
 
