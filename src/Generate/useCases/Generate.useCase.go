@@ -2,45 +2,37 @@ package GenerateUseCases
 
 import (
 	"fmt"
+	"math/rand"
 	"net/http"
-	"strconv"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	CombinationRepo "github.com/glener10/rotating-pairs-back/src/Combinations/repositories"
-	CombinationUtils "github.com/glener10/rotating-pairs-back/src/Combinations/utils"
 	GenerateRequestDto "github.com/glener10/rotating-pairs-back/src/Generate/dtos"
 )
 
 func Generate(c *gin.Context, combinationRequest GenerateRequestDto.GenerateRequest) {
 	NumberOfInputs := combinationRequest.NumberOfInputs
-	results, err := CombinationRepo.FindCombination(NumberOfInputs)
+	_, err := CombinationRepo.FindCombination(NumberOfInputs)
 	if err == nil {
 		statusCode := http.StatusOK
 		c.JSON(statusCode, gin.H{"error": "There is already a transaction with this number of entries", "statusCode": statusCode})
 		return
 	}
-	arrayOfPositions := returnArrayOfIndexOfNumberOfInputsSize(NumberOfInputs)
-	numberOfInputsIsOdd := CombinationUtils.CheckIfArrayIsOdd(arrayOfPositions)
-	numberOfSprint := CombinationUtils.ReturnNumberOfSprints(numberOfInputsIsOdd, arrayOfPositions)
-	numberOfCombinationPerSprint := CombinationUtils.ReturnNumberOfCombinationPerSprintRoundedDown(numberOfInputsIsOdd, arrayOfPositions)
-
-	sizeOfLoop := returnSizeOfCombinationsLoop(arrayOfPositions, numberOfCombinationPerSprint)
-
-	fmt.Println(sizeOfLoop, numberOfSprint)
-	c.JSON(http.StatusOK, results)
+	statusCode := http.StatusOK
+	c.JSON(statusCode, gin.H{"error": "Trying generating combinations without repetitions...", "statusCode": statusCode})
+	if shouldReturn() {
+		fmt.Println("Error to generate Combination")
+		return
+	}
+	fmt.Println("Combination Generated")
 }
 
-func returnSizeOfCombinationsLoop(arrayOfPositions []string, numberOfCombinationPerSprint int) int {
-	if len(arrayOfPositions) == 2 {
-		return numberOfCombinationPerSprint
+func shouldReturn() bool {
+	rand.Seed(time.Now().UnixNano())
+	randomNumber := rand.Intn(101) // Gera um número aleatório entre 0 e 100
+	if randomNumber < 50 {
+		return true
 	}
-	return numberOfCombinationPerSprint - 1
-}
-
-func returnArrayOfIndexOfNumberOfInputsSize(NumberOfInputs int16) []string {
-	var array []string
-	for i := 0; i < int(NumberOfInputs); i++ {
-		array = append(array, strconv.Itoa(i))
-	}
-	return array
+	return false
 }

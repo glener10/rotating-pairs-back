@@ -4,16 +4,5 @@ Authorization: Bearer {{$dotenv SECRET}}
 content-type: application/json
 
 {
-  "NumberOfInputs": 2
-}
-
-###Combination, Try Generate a new Combination without repetitions
-POST http://localhost:8080/generate
-Authorization: Bearer {{$dotenv SECRET}}
-content-type: application/json
-
-{
-  "NumberOfInputs": 2,
-  "MAX_NUMBER_OF_SHUFFLING_ARRAY_OF_POSSIBLE_COMBINATIONS_BEFORE_ALTERNING_SHUFFLE_METHOD": 2000,
-  "MAX_NUMBER_OF_ALTERNING_SHUFFLE_METHOD": 1000
+  "NumberOfInputs": 4
 }
