@@ -7,7 +7,7 @@ import (
 	"github.com/glener10/rotating-pairs-back/src/routes"
 )
 
-func main() {
+func Handler() {
 	if err := Utils.LoadEnvironmentVariables("../.env"); err != nil {
 		fmt.Println("Error to load environment variables: ", err)
 		return
