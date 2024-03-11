@@ -16,3 +16,13 @@ func Handler() {
 	r := routes.HandlerRoutes()
 	routes.Listening(r)
 }
+
+func main() {
+	if err := Utils.LoadEnvironmentVariables("../.env"); err != nil {
+		fmt.Println("Error to load environment variables: ", err)
+		return
+	}
+
+	r := routes.HandlerRoutes()
+	routes.Listening(r)
+}
