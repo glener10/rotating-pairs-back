@@ -1,4 +1,4 @@
-package handler
+package main
 
 import (
 	"fmt"
@@ -7,8 +7,8 @@ import (
 	"github.com/glener10/rotating-pairs-back/src/routes"
 )
 
-func Handler() {
-	if err := Utils.LoadEnvironmentVariables("../.env"); err != nil {
+func main() {
+	if err := Utils.LoadEnvironmentVariables(".env"); err != nil {
 		fmt.Println("Error to load environment variables: ", err)
 		return
 	}

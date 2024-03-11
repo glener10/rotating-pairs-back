@@ -99,10 +99,10 @@ go test -p 1 ./src/...
 
 First, check the [dependencies](#dependenciesandenvironment) and the [installation](#installing) process:
 
-Going to _api_ folder and exec:
+Going to _root_ folder and exec:
 
 ```
-go run .\index.go
+go run .\main.go
 ```
 
 Now you can open [http://localhost:8080](http://localhost:8080) with your browser to see the result.
