@@ -99,7 +99,7 @@ go test -p 1 ./src/...
 
 First, check the [dependencies](#dependenciesandenvironment) and the [installation](#installing) process:
 
-Going to root folder and exec:
+Going to _root_ folder and exec:
 
 ```
 go run .\main.go
@@ -125,7 +125,7 @@ To learn more about technologies used in the application:
 
 ## 🔒 **License**
 
-Project have [GNU GENERAL PUBLIC LICENSE](LICENSE).
+Project have a [GNU GENERAL PUBLIC LICENSE](LICENSE).
 
 <div id="author"></div>
 
