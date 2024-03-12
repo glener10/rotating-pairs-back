@@ -125,7 +125,7 @@ To learn more about technologies used in the application:
 
 ## 🔒 **License**
 
-Project have [GNU GENERAL PUBLIC LICENSE](LICENSE).
+Project have a [GNU GENERAL PUBLIC LICENSE](LICENSE).
 
 <div id="author"></div>
 
