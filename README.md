@@ -36,9 +36,6 @@ Returning the positions of combinations used in the application (Limited beetwen
 
 ===================
 
-The production application is in [rotating-pairs-back-production](https://rotating-pairs-back-production.up.railway.app/), the only route that is available to any origin is '/', where you will see a Hello World! The other routes are private to the Front-End application, you can [exec locally](#using) the back-end with some limited values.
-
-You can access the production Front-End application via the link [Rotating Pair](https://rotatingpairs.online)
 The front-end source code [hear](https://github.com/glener10/rotating-pairs-front).
 
 <div id="dependenciesandenvironment"></div>
