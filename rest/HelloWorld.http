@@ -1,0 +1,2 @@
+###Combination, Return a CombinationEntity and increment a Combination Generation Counter
+GET http://localhost:8080/

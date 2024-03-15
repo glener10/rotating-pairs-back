@@ -17,6 +17,8 @@ import (
 func HandlerRoutes() *gin.Engine {
 	r := gin.Default()
 
+	r.Use(Middlewares.TimeoutMiddleware())
+
 	r.GET("/", func(c *gin.Context) {
 		c.String(200, "Hello, World!")
 	})
