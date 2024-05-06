@@ -1,3 +1,7 @@
+# [v1.1.1] - 06/05/2024 (dd/mm/YYYY)
+
+- removing authentication, as the application was out of production and had weak authentication
+
 # [v1.1.0] - XX/XX/XXXX (dd/mm/YYYY)
 
 - New route (POST /generate) that tries to generate combination with input number X without repetitions

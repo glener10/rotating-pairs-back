@@ -8,7 +8,7 @@
 [![License](https://img.shields.io/github/license/glener10/rotating-pairs-back)](/LICENSE)
 
 <p align="center"> 🚀 Back-End of Rotating Pairs Web Application. Responsible for saving monitoring logs and
-Returning the positions of combinations used in the application (Limited beetwen 2 and 20), like this. 👇🏽 </p>
+Returning the positions of combinations used in the application (Limited beetwen 2 and 10), like this. 👇🏽 </p>
 
 ![Return Example](/documentation/readmeImages/return.png)
 
@@ -73,9 +73,7 @@ You will need to a _.env_ file in root folder
 ```env
 MONGODB_URI=mongodb://localhost:27017
 MONGODB_DATABASE_NAME=test
-ALLOW_URLS=*
 ENV=development
-SECRET=banana
 ```
 
 <div id="testing"></div>

@@ -3,7 +3,6 @@ package routes
 import (
 	"fmt"
 	"os"
-	"strings"
 	"time"
 
 	"github.com/gin-contrib/cors"
@@ -24,7 +23,7 @@ func HandlerRoutes() *gin.Engine {
 	})
 
 	r.Use(cors.New(cors.Config{
-		AllowOrigins:     getAllowedURLs(),
+		AllowOrigins:     []string{"*"},
 		AllowMethods:     []string{"GET", "POST"},
 		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
 		ExposeHeaders:    []string{"Content-Length", "Content-Type"},
@@ -35,7 +34,6 @@ func HandlerRoutes() *gin.Engine {
 	if os.Getenv("ENV") != "development" {
 		rateLimiter := Middlewares.NewRateLimiter(11, time.Minute)
 		r.Use(Middlewares.RequestLimitMiddleware(rateLimiter))
-		r.Use(Middlewares.AuthMiddleware())
 		//r.Use(Middlewares.MethodsMiddleware())
 		//r.Use(Middlewares.HTTPSOnlyMiddleware())
 	}
@@ -53,16 +51,4 @@ func Listening(r *gin.Engine) {
 		fmt.Println("Error to up routes")
 		os.Exit(-1)
 	}
-}
-
-func getAllowedURLs() []string {
-	if os.Getenv("ENV") == "development" {
-		return []string{"*"}
-	}
-	allowedURLsString := os.Getenv("ALLOW_URLS")
-	if allowedURLsString == "" {
-		return nil
-	}
-	allowedUrlsString := strings.Split(allowedURLsString, "|")
-	return allowedUrlsString
 }
